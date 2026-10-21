@@ -640,8 +640,20 @@ hr {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: sepia(0.24) saturate(0.72) contrast(0.97) brightness(1.02);
+  filter: sepia(0) saturate(1) contrast(1.02);
   transition: transform 0.8s var(--ease), filter 0.4s var(--ease);
+}
+
+/* Touch screens cannot hover, so photos show their revealed colour there.
+   The resting film tone and its hover reveal are pointer-only. */
+@media (hover: hover) {
+  .frame__mat img {
+    filter: sepia(0.24) saturate(0.72) contrast(0.97) brightness(1.02);
+  }
+
+  .frame__mat:hover img {
+    filter: sepia(0) saturate(1) contrast(1.02);
+  }
 }
 
 .frame figcaption {
@@ -1388,12 +1400,17 @@ hr {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: sepia(0.24) saturate(0.72) contrast(0.97) brightness(1.02);
+  filter: sepia(0) saturate(1) contrast(1.02);
   transition: filter 0.35s var(--ease), opacity 0.35s var(--ease);
 }
 
-/* Touch screens have no hover: keep photos in their resting film tone. */
+/* Same rule as the frames: touch screens get the revealed colour, pointers
+   get the film tone that lifts on hover. */
 @media (hover: hover) {
+  .photo-item__mat img {
+    filter: sepia(0.24) saturate(0.72) contrast(0.97) brightness(1.02);
+  }
+
   .photo-item:hover .photo-item__mat img {
     filter: sepia(0) saturate(1) contrast(1.02);
   }
@@ -2865,12 +2882,6 @@ html.js [data-reveal].is-visible {
 a.frame__mat {
   display: block;
   text-decoration: none;
-}
-
-@media (hover: hover) {
-  .frame__mat:hover img {
-    filter: sepia(0) saturate(1) contrast(1.02);
-  }
 }
 
 .section-foot {
