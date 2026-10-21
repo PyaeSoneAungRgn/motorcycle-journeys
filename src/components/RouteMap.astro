@@ -1,0 +1,101 @@
+---
+import type { MapMode, MapRoute } from '../lib/map-types';
+
+interface Props {
+  routes: MapRoute[];
+  mode?: MapMode;
+  height?: string;
+  legend?: boolean;
+  marker?: { lat: number; lng: number; label: string };
+  label?: string;
+  id?: string;
+  reset?: boolean;
+}
+
+const {
+  routes,
+  mode = 'detail',
+  height = '420px',
+  legend = false,
+  marker,
+  label = 'Motorcycle route map',
+  id,
+  reset = false,
+} = Astro.props;
+
+const payload = { mode, routes, ...(marker ? { marker } : {}) };
+const json = JSON.stringify(payload).replace(/</g, '\\u003c');
+---
+
+<div class="map-shell" data-map data-mode={mode} style={`--map-h:${height}`} id={id}>
+  <div
+    class="map-canvas"
+    data-map-canvas
+    role="region"
+    aria-label={label}
+    tabindex={mode === 'preview' ? '-1' : '0'}
+  >
+  </div>
+  <div class="map-fallback">Interactive map unavailable.</div>
+  <p class="map-note" data-map-note hidden></p>
+  {reset && (
+    <button class="map-reset" type="button" data-map-reset>
+      All routes
+    </button>
+  )}
+  <noscript>
+    <p class="map-note">Enable JavaScript for the interactive map. Route details are listed below.</p>
+  </noscript>
+  <script type="application/json" data-map-data set:html={json}></script>
+</div>
+
+{legend && (
+  <div class="map-legend" aria-hidden="true">
+    <span class="map-legend__item"><span class="map-legend__line"></span> Route</span>
+    <span class="map-legend__item"><span class="map-legend__dot"></span> Stop</span>
+    <span class="map-legend__item">Basemap · OpenFreeMap / OpenStreetMap</span>
+  </div>
+)}
+
+<ul class="visually-hidden">
+  {routes.map((route) => (
+    <li>
+      {route.name}, {route.region}: {route.distanceKm} kilometres over {route.days} {route.days === 1 ? 'day' : 'days'},{' '}
+      {route.stops.length} stops.
+    </li>
+  ))}
+</ul>
+
+<script>
+  type MapWindow = Window & { __psaMapsLoaded?: boolean };
+  const mapWindow = window as MapWindow;
+
+  const loadMaps = () => {
+    if (mapWindow.__psaMapsLoaded) return;
+    mapWindow.__psaMapsLoaded = true;
+    import('../scripts/map').catch((error) => {
+      console.error(error);
+      document
+        .querySelectorAll<HTMLElement>('[data-map]')
+        .forEach((shell) => shell.classList.add('map-failed'));
+    });
+  };
+
+  const shells = Array.from(document.querySelectorAll<HTMLElement>('[data-map]'));
+
+  if ('IntersectionObserver' in window) {
+    // Keep MapLibre off the critical path: load it only when a map approaches the viewport.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        loadMaps();
+      },
+      { rootMargin: '500px 0px' },
+    );
+
+    shells.forEach((shell) => observer.observe(shell));
+  } else {
+    loadMaps();
+  }
+</script>

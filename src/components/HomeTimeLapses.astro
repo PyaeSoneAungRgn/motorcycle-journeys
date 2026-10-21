@@ -1,0 +1,42 @@
+---
+import TimeLapseMedia from './TimeLapseMedia.astro';
+import type { HomeTimeLapseItem } from '../lib/timelapses';
+
+interface Props {
+  items: HomeTimeLapseItem[];
+}
+
+const { items } = Astro.props;
+const [featured, ...rest] = items;
+---
+
+<div class="home-timelapses">
+  {featured && (
+    <TimeLapseMedia
+      timeLapse={{
+        ...featured,
+        note: `${featured.rideTitle} · ${featured.note}`,
+      }}
+      autoplay
+    />
+  )}
+
+  {rest.length > 0 && (
+    <div class="home-timelapses__grid">
+      {rest.map((item) => (
+        <TimeLapseMedia
+          timeLapse={{
+            ...item,
+            note: `${item.rideTitle} · ${item.note}`,
+          }}
+          autoplay={false}
+          compact
+        />
+      ))}
+    </div>
+  )}
+</div>
+
+<script>
+  import '../scripts/timelapse';
+</script>

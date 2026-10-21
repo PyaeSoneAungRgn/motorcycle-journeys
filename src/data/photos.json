@@ -1,0 +1,1052 @@
+[
+  {
+    "id": "nan-khao-soi",
+    "file": "nan-khao-soi.jpg",
+    "alt": "The sign outside a khao soi shop in Nan",
+    "caption": "Khao soi, Nan",
+    "location": "Nan town, Thailand",
+    "coords": [
+      18.7753,
+      100.7697
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-13T09:12:15+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-golden-buddha",
+    "file": "nan-golden-buddha.jpg",
+    "alt": "A large golden Buddha statue inside a richly decorated temple",
+    "caption": "The golden hall",
+    "location": "Wat Phra That Chae Haeng, Nan",
+    "coords": [
+      18.7581,
+      100.7917
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-13T12:29:25+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-white-temple",
+    "file": "nan-white-temple.jpg",
+    "alt": "An ornate white temple facade with serpent stairways",
+    "caption": "Wat Ming Muang",
+    "location": "Nan town, Thailand",
+    "coords": [
+      18.7749,
+      100.7716
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-13T16:27:24+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-black-buddhas",
+    "file": "nan-black-buddhas.jpg",
+    "alt": "Two dark Buddha statues seated in a decorated temple hall",
+    "caption": "Black Buddhas",
+    "location": "Nan town, Thailand",
+    "coords": [
+      18.7749,
+      100.7716
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-13T16:31:53+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-temple-lights",
+    "file": "nan-temple-lights.jpg",
+    "alt": "A temple courtyard at night filled with blue and gold lights reflected in water",
+    "caption": "Lights on the water",
+    "location": "Nan town, Thailand",
+    "coords": [
+      18.7659,
+      100.7807
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-13T18:21:58+07:00",
+    "featured": true
+  },
+  {
+    "id": "nan-first-view",
+    "file": "nan-first-view.jpg",
+    "alt": "A woman standing in a meadow looking at a mountain valley",
+    "caption": "The first view",
+    "location": "Nan province, Thailand",
+    "coords": [
+      18.9875,
+      100.9244
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-14T09:15:53+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-photographer",
+    "file": "nan-photographer.jpg",
+    "alt": "A man in a dark shirt photographing a mountain valley",
+    "caption": "Making a photograph",
+    "location": "Nan province, Thailand",
+    "coords": [
+      18.9875,
+      100.9244
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-14T09:19:00+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-farm-sign",
+    "file": "nan-farm-sign.jpg",
+    "alt": "A wooden farm sign surrounded by trees and flowers",
+    "caption": "Pang Wua Farm",
+    "location": "Nan province, Thailand",
+    "coords": [
+      18.9875,
+      100.9244
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-14T09:33:40+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-road-curve",
+    "file": "nan-road-curve.jpg",
+    "alt": "A paved road curving through green hills beneath a cloudy sky",
+    "caption": "The climb",
+    "location": "Street Number 3, Nan",
+    "coords": [
+      18.974,
+      101.034
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-14T10:19:13+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-valley-road",
+    "file": "nan-valley-road.jpg",
+    "alt": "A narrow road winding along a green mountain valley",
+    "caption": "Tortuous road",
+    "location": "Tortuous Road Viewpoint, Nan",
+    "coords": [
+      19.0693,
+      101.1264
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-14T11:24:41+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-khun-nan",
+    "file": "nan-khun-nan.jpg",
+    "alt": "A rider standing beside a loaded motorcycle in front of the Khun Nan National Park sign",
+    "caption": "Khun Nan National Park",
+    "location": "Khun Nan National Park, Nan",
+    "coords": [
+      19.1811,
+      101.1792
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-14T12:41:40+07:00",
+    "featured": true
+  },
+  {
+    "id": "nan-sapan-valley",
+    "file": "nan-sapan-valley.jpg",
+    "alt": "A village in a green valley beneath cloud-covered mountains",
+    "caption": "Sapan, late afternoon",
+    "location": "Sapan, Nan",
+    "coords": [
+      19.1929,
+      101.2023
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-14T15:51:19+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-sapan-bridge",
+    "file": "nan-sapan-bridge.jpg",
+    "alt": "A rider standing on a concrete bridge beneath a large sign",
+    "caption": "The bridge at Sapan",
+    "location": "Sapan, Nan",
+    "coords": [
+      19.1927,
+      101.1982
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-14T17:55:59+07:00",
+    "featured": true
+  },
+  {
+    "id": "nan-sapan-morning",
+    "file": "nan-sapan-morning.jpg",
+    "alt": "Mist hanging over a mountain village in the early morning",
+    "caption": "Morning in Sapan",
+    "location": "Sapan, Nan",
+    "coords": [
+      19.1889,
+      101.2005
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-15T08:49:03+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-rice-fields",
+    "file": "nan-rice-fields.jpg",
+    "alt": "Green terraced rice fields surrounded by forested mountains",
+    "caption": "Rice fields below Piang So",
+    "location": "Ban Piang So, Nan",
+    "coords": [
+      19.3467,
+      101.1595
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-15T11:32:09+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-sky-road",
+    "file": "nan-sky-road.jpg",
+    "alt": "An empty asphalt road leading toward layered forested mountains",
+    "caption": "The Piang So sky road",
+    "location": "Piang So, Nan",
+    "coords": [
+      19.361,
+      101.1872
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-15T12:38:45+07:00",
+    "featured": true
+  },
+  {
+    "id": "nan-sky-road-riders",
+    "file": "nan-sky-road-riders.jpg",
+    "alt": "Two people standing on a ridge road beside their motorcycles",
+    "caption": "Two riders, one ridge",
+    "location": "Piang So, Nan",
+    "coords": [
+      19.361,
+      101.1871
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-15T12:42:53+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-viewpoint",
+    "file": "nan-viewpoint.jpg",
+    "alt": "A man sitting on a wooden viewpoint deck above a mountain valley",
+    "caption": "Above Piang So",
+    "location": "Piang So, Nan",
+    "coords": [
+      19.3615,
+      101.1874
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-15T13:11:29+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-ridge",
+    "file": "nan-ridge.jpg",
+    "alt": "Layered mountain ridges disappearing into cloud",
+    "caption": "The ridge line",
+    "location": "Piang So, Nan",
+    "coords": [
+      19.3615,
+      101.1874
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-15T13:13:29+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-1715",
+    "file": "nan-1715.jpg",
+    "alt": "A rider standing beside a large viewpoint sign at 1,715 metres",
+    "caption": "Viewpoint 1,715",
+    "location": "Doi Phu Kha, Nan",
+    "coords": [
+      19.1747,
+      101.1065
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-16T10:28:20+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-doi-phu-kha",
+    "file": "nan-doi-phu-kha.jpg",
+    "alt": "Green mountain ridges and valleys under a cloudy sky",
+    "caption": "Doi Phu Kha",
+    "location": "Doi Phu Kha, Nan",
+    "coords": [
+      19.203,
+      101.0612
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-16T11:35:38+07:00",
+    "featured": true
+  },
+  {
+    "id": "nan-airport-night",
+    "file": "nan-airport-night.jpg",
+    "alt": "An AirAsia passenger plane at the airport at night",
+    "caption": "Back to Bangkok",
+    "location": "Nan Nakhon Airport, Nan",
+    "coords": [
+      18.8026,
+      100.7848
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-17T19:01:30+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-park-register",
+    "file": "nan-park-register.jpg",
+    "alt": "A park sign with a notebook of stamps and handwritten notes",
+    "caption": "Park register",
+    "location": "Khun Nan National Park, Nan",
+    "coords": [
+      19.1811,
+      101.1792
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-14T12:55:40+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-stamps",
+    "file": "nan-stamps.jpg",
+    "alt": "A notebook of passport stamps and travel notes",
+    "caption": "Stamps and notes",
+    "location": "Pua, Nan",
+    "coords": [
+      19.1829,
+      100.9102
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-16T13:19:16+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-cafe",
+    "file": "nan-cafe.jpg",
+    "alt": "A café counter filled with plants, coffee equipment and small objects",
+    "caption": "Pangwua Farm",
+    "location": "Pangwua Farm Cafe, Nan",
+    "coords": [
+      18.9874,
+      100.9241
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-14T09:33:04+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-museum",
+    "file": "nan-museum.jpg",
+    "alt": "A museum display case holding small artefacts and labels",
+    "caption": "National Museum",
+    "location": "Nan old town, Thailand",
+    "coords": [
+      18.7762,
+      100.7709
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-17T14:57:22+07:00",
+    "featured": false
+  },
+  {
+    "id": "nan-museum-portrait",
+    "file": "nan-museum-portrait.jpg",
+    "alt": "A visitor standing beside a museum display case",
+    "caption": "Inside the museum",
+    "location": "Nan old town, Thailand",
+    "coords": [
+      18.7762,
+      100.7704
+    ],
+    "ride": "nan-loop",
+    "takenAt": "2026-10-17T15:10:14+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-first-valley-valley",
+    "file": "cm-first-valley-valley.jpg",
+    "alt": "Forested mountains with scattered pink blossoms under a blue sky, seen from a hillside cafe",
+    "caption": "The valley from the academy",
+    "location": "The First Valley, Mae Rim",
+    "coords": [
+      18.941,
+      99.3631
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2025-12-28T08:45:56+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-first-valley-ridge",
+    "file": "cm-first-valley-ridge.jpg",
+    "alt": "Layered green mountains under a bright sky, seen from the First Valley coffee academy",
+    "caption": "Morning at First Valley",
+    "location": "The First Valley, Mae Rim",
+    "coords": [
+      18.941,
+      99.3631
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2025-12-28T08:46:03+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-first-valley-fireplace",
+    "file": "cm-first-valley-fireplace.jpg",
+    "alt": "A stone fireplace decorated with Christmas garlands beneath a mounted deer head",
+    "caption": "Fire in the room",
+    "location": "The First Valley, Mae Rim",
+    "coords": [
+      18.941,
+      99.3631
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2025-12-28T08:46:18+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-first-valley-terrace",
+    "file": "cm-first-valley-terrace.jpg",
+    "alt": "A coffee cup on a tiled table beside a railing, with mountains beyond",
+    "caption": "Coffee on the terrace",
+    "location": "The First Valley, Mae Rim",
+    "coords": [
+      18.941,
+      99.3631
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2025-12-28T08:53:32+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-first-valley-bar",
+    "file": "cm-first-valley-bar.jpg",
+    "alt": "A wooden coffee bar with espresso machines, shelves and framed pictures",
+    "caption": "The coffee bar",
+    "location": "The First Valley, Mae Rim",
+    "coords": [
+      18.941,
+      99.3631
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2025-12-28T10:07:21+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-first-valley-window",
+    "file": "cm-first-valley-window.jpg",
+    "alt": "A wooden table and chairs beside a window framing green mountains",
+    "caption": "A table with a view",
+    "location": "The First Valley, Mae Rim",
+    "coords": [
+      18.941,
+      99.3631
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2025-12-28T10:07:46+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-first-valley-blossoms",
+    "file": "cm-first-valley-blossoms.jpg",
+    "alt": "Pink blossoms scattered across forested mountains in the afternoon light",
+    "caption": "Blossom on the ridge",
+    "location": "The First Valley, Mae Rim",
+    "coords": [
+      18.941,
+      99.3631
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2025-12-28T10:37:32+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-first-valley-house",
+    "file": "cm-first-valley-house.jpg",
+    "alt": "A timber house with a red roof perched on a green hillside",
+    "caption": "The academy building",
+    "location": "The First Valley, Mae Rim",
+    "coords": [
+      18.941,
+      99.3631
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2025-12-28T13:26:30+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-khun-chang-khian-blossoms",
+    "file": "cm-khun-chang-khian-blossoms.jpg",
+    "alt": "Pink cherry blossoms against a blue sky above a hillside village",
+    "caption": "Wild Himalayan cherry",
+    "location": "Khun Chang Khian, Chiang Mai",
+    "coords": [
+      18.8399,
+      98.8981
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2025-12-30T07:38:16+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-khun-chang-khian-house",
+    "file": "cm-khun-chang-khian-house.jpg",
+    "alt": "A wooden house framed by a flowering pink cherry tree",
+    "caption": "The house under the blossom",
+    "location": "Khun Chang Khian, Chiang Mai",
+    "coords": [
+      18.8399,
+      98.8981
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2025-12-30T07:39:37+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-khun-chang-khian-sign",
+    "file": "cm-khun-chang-khian-sign.jpg",
+    "alt": "A traveller standing by a wooden sign above a valley filled with mist",
+    "caption": "At the Khun Chang Khian sign",
+    "location": "Khun Chang Khian, Chiang Mai",
+    "coords": [
+      18.8399,
+      98.8981
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2025-12-30T07:40:30+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-pai-coffee-view",
+    "file": "cm-pai-coffee-view.jpg",
+    "alt": "A coffee cup and a small tripod on a wooden terrace overlooking green fields",
+    "caption": "Coffee and a tripod",
+    "location": "Pai valley, Mae Hong Son",
+    "coords": [
+      19.3219,
+      98.4552
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2025-12-31T15:47:20+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-pai-last-light",
+    "file": "cm-pai-last-light.jpg",
+    "alt": "The sun low over a misty valley with green fields and trees",
+    "caption": "Last light of 2025",
+    "location": "Pai valley, Mae Hong Son",
+    "coords": [
+      19.3219,
+      98.4552
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2025-12-31T17:07:43+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-pai-lam-sign",
+    "file": "cm-pai-lam-sign.jpg",
+    "alt": "A red songthaew parked beside a large Lam Pai sign",
+    "caption": "Lam Pai",
+    "location": "Pai, Mae Hong Son",
+    "coords": [
+      19.3382,
+      98.4331
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2026-01-01T09:06:12+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-pai-century-sign",
+    "file": "cm-pai-century-sign.jpg",
+    "alt": "A hilltop sign reading 100 years above a mountain valley",
+    "caption": "A hundred years, more or less",
+    "location": "Yun Lai, Pai",
+    "coords": [
+      19.369,
+      98.3953
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2026-01-01T09:31:41+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-pai-village",
+    "file": "cm-pai-village.jpg",
+    "alt": "Thatched-roof huts around a green lawn under a clear blue sky",
+    "caption": "The village above Pai",
+    "location": "Yun Lai, Pai",
+    "coords": [
+      19.369,
+      98.3953
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2026-01-01T09:31:59+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-pai-love-tree",
+    "file": "cm-pai-love-tree.jpg",
+    "alt": "A tree hung with thousands of colourful ribbons above a hedge",
+    "caption": "Ribbons on the love tree",
+    "location": "Yun Lai, Pai",
+    "coords": [
+      19.369,
+      98.3953
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2026-01-01T09:32:09+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-pai-yun-lai",
+    "file": "cm-pai-yun-lai.jpg",
+    "alt": "A wooden gate with red lanterns framing a view of the mountains",
+    "caption": "The gate at Yun Lai",
+    "location": "Yun Lai, Pai",
+    "coords": [
+      19.369,
+      98.3953
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2026-01-01T09:33:11+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-pai-khao-soi",
+    "file": "cm-pai-khao-soi.jpg",
+    "alt": "A woven tray of northern Thai dishes with noodles, vegetables and dipping sauces",
+    "caption": "Khao soi, Pai",
+    "location": "Pai town, Mae Hong Son",
+    "coords": [
+      19.357,
+      98.44
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2026-01-01T11:36:57+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-chiang-dao-rays",
+    "file": "cm-chiang-dao-rays.jpg",
+    "alt": "Sun rays breaking through heavy clouds over a dark mountain ridge",
+    "caption": "Clouds over Chiang Dao",
+    "location": "Chiang Dao, Chiang Mai",
+    "coords": [
+      19.4148,
+      98.8445
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2026-01-03T10:09:43+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-chiang-dao-ridge",
+    "file": "cm-chiang-dao-ridge.jpg",
+    "alt": "Layered mountain ridges under dramatic clouds and sunbeams",
+    "caption": "The ridge from the deck",
+    "location": "Chiang Dao, Chiang Mai",
+    "coords": [
+      19.4148,
+      98.8445
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2026-01-03T10:14:19+07:00",
+    "featured": false
+  },
+  {
+    "id": "cm-chiang-dao-viewpoint",
+    "file": "cm-chiang-dao-viewpoint.jpg",
+    "alt": "A traveller sitting on a wooden deck with a mountain valley behind him",
+    "caption": "At the viewpoint",
+    "location": "Chiang Dao, Chiang Mai",
+    "coords": [
+      19.4148,
+      98.8445
+    ],
+    "ride": "chiang-mai-pai",
+    "takenAt": "2026-01-03T10:56:29+07:00",
+    "featured": false
+  },
+  {
+    "id": "vn-lady-buddha",
+    "file": "vn-lady-buddha.jpg",
+    "alt": "A tall white Lady Buddha statue standing above the trees, with mountains behind",
+    "caption": "The Lady Buddha",
+    "location": "Linh Ung Pagoda, Son Tra",
+    "coords": [
+      16.0991,
+      108.2768
+    ],
+    "ride": "da-nang-hai-van",
+    "takenAt": "2025-09-20T12:58:32+07:00",
+    "featured": false
+  },
+  {
+    "id": "vn-linh-ung-courtyard",
+    "file": "vn-linh-ung-courtyard.jpg",
+    "alt": "A stone courtyard with clipped bonsai trees and a pagoda roof",
+    "caption": "The courtyard",
+    "location": "Linh Ung Pagoda, Son Tra",
+    "coords": [
+      16.0991,
+      108.2768
+    ],
+    "ride": "da-nang-hai-van",
+    "takenAt": "2025-09-20T13:04:20+07:00",
+    "featured": false
+  },
+  {
+    "id": "vn-linh-ung-hall",
+    "file": "vn-linh-ung-hall.jpg",
+    "alt": "A gilded Buddha statue surrounded by flowers inside a temple hall",
+    "caption": "Inside the hall",
+    "location": "Linh Ung Pagoda, Son Tra",
+    "coords": [
+      16.0991,
+      108.2768
+    ],
+    "ride": "da-nang-hai-van",
+    "takenAt": "2025-09-20T13:06:06+07:00",
+    "featured": false
+  },
+  {
+    "id": "vn-linh-ung-gate",
+    "file": "vn-linh-ung-gate.jpg",
+    "alt": "A stone gateway and steps lined with potted plants",
+    "caption": "The gate",
+    "location": "Linh Ung Pagoda, Son Tra",
+    "coords": [
+      16.0991,
+      108.2768
+    ],
+    "ride": "da-nang-hai-van",
+    "takenAt": "2025-09-20T13:06:31+07:00",
+    "featured": false
+  },
+  {
+    "id": "vn-son-tra-coast",
+    "file": "vn-son-tra-coast.jpg",
+    "alt": "A green headland dropping into a blue sea under a wide sky",
+    "caption": "The Son Tra coast",
+    "location": "Son Tra Peninsula, Da Nang",
+    "coords": [
+      16.1134,
+      108.3108
+    ],
+    "ride": "da-nang-hai-van",
+    "takenAt": "2025-09-20T13:36:40+07:00",
+    "featured": false
+  },
+  {
+    "id": "vn-my-khe-night",
+    "file": "vn-my-khe-night.jpg",
+    "alt": "A beach at night with the lights of Da Nang behind it",
+    "caption": "My Khe after dark",
+    "location": "My Khe Beach, Da Nang",
+    "coords": [
+      16.0649,
+      108.2468
+    ],
+    "ride": "da-nang-hai-van",
+    "takenAt": "2025-09-20T19:28:40+07:00",
+    "featured": false
+  },
+  {
+    "id": "vn-da-nang-night",
+    "file": "vn-da-nang-night.jpg",
+    "alt": "A colourful high-rise skyline lit up at night",
+    "caption": "The city at night",
+    "location": "Da Nang",
+    "coords": [
+      16.0623,
+      108.2471
+    ],
+    "ride": "da-nang-hai-van",
+    "takenAt": "2025-09-20T19:45:41+07:00",
+    "featured": false
+  },
+  {
+    "id": "vn-da-nang-sign",
+    "file": "vn-da-nang-sign.jpg",
+    "alt": "A circular sculpture spelling Da Nang on a wide beach",
+    "caption": "The Da Nang sign",
+    "location": "Da Nang Bay, Da Nang",
+    "coords": [
+      16.1107,
+      108.1327
+    ],
+    "ride": "da-nang-hai-van",
+    "takenAt": "2025-09-21T07:40:19+07:00",
+    "featured": false
+  },
+  {
+    "id": "vn-da-nang-tower",
+    "file": "vn-da-nang-tower.jpg",
+    "alt": "A tall patterned tower rising above the beach",
+    "caption": "The tower by the bay",
+    "location": "Da Nang Bay, Da Nang",
+    "coords": [
+      16.1107,
+      108.1327
+    ],
+    "ride": "da-nang-hai-van",
+    "takenAt": "2025-09-21T07:43:25+07:00",
+    "featured": false
+  },
+  {
+    "id": "vn-hai-van-farm",
+    "file": "vn-hai-van-farm.jpg",
+    "alt": "Goats and a wooden shack on a rocky hillside",
+    "caption": "A stop before the climb",
+    "location": "Hai Van Pass, Da Nang",
+    "coords": [
+      16.154,
+      108.1332
+    ],
+    "ride": "da-nang-hai-van",
+    "takenAt": "2025-09-21T08:18:47+07:00",
+    "featured": false
+  },
+  {
+    "id": "vn-hai-van-rest",
+    "file": "vn-hai-van-rest.jpg",
+    "alt": "A rider sitting on a wooden chair overlooking the sea",
+    "caption": "A chair with a view",
+    "location": "Hai Van Pass, Da Nang",
+    "coords": [
+      16.154,
+      108.1332
+    ],
+    "ride": "da-nang-hai-van",
+    "takenAt": "2025-09-21T08:23:07+07:00",
+    "featured": false
+  },
+  {
+    "id": "vn-hai-van-curve",
+    "file": "vn-hai-van-curve.jpg",
+    "alt": "A hairpin bend on the Hai Van Pass with a yellow centre line",
+    "caption": "The climb",
+    "location": "Hai Van Pass, Da Nang",
+    "coords": [
+      16.1848,
+      108.1366
+    ],
+    "ride": "da-nang-hai-van",
+    "takenAt": "2025-09-21T08:47:59+07:00",
+    "featured": false
+  },
+  {
+    "id": "vn-hai-van-bay",
+    "file": "vn-hai-van-bay.jpg",
+    "alt": "Da Nang Bay seen from the Hai Van Pass",
+    "caption": "The bay from the pass",
+    "location": "Hai Van Pass, Da Nang",
+    "coords": [
+      16.1848,
+      108.1366
+    ],
+    "ride": "da-nang-hai-van",
+    "takenAt": "2025-09-21T08:48:07+07:00",
+    "featured": false
+  },
+  {
+    "id": "vn-hai-van-view",
+    "file": "vn-hai-van-view.jpg",
+    "alt": "A wide view of the coast and mountains from the pass",
+    "caption": "The view north",
+    "location": "Hai Van Pass, Da Nang",
+    "coords": [
+      16.1877,
+      108.1315
+    ],
+    "ride": "da-nang-hai-van",
+    "takenAt": "2025-09-21T08:58:09+07:00",
+    "featured": false
+  },
+  {
+    "id": "vn-hai-van-wall",
+    "file": "vn-hai-van-wall.jpg",
+    "alt": "An old stone wall and railing above a green valley",
+    "caption": "The old wall",
+    "location": "Hai Van Pass, Da Nang",
+    "coords": [
+      16.1877,
+      108.1315
+    ],
+    "ride": "da-nang-hai-van",
+    "takenAt": "2025-09-21T09:00:00+07:00",
+    "featured": false
+  },
+  {
+    "id": "di-cloud-sea",
+    "file": "di-cloud-sea.jpg",
+    "alt": "A traveller standing above a valley filled with cloud at sunrise",
+    "caption": "Above the cloud sea",
+    "location": "Doi Inthanon, Chiang Mai",
+    "coords": [
+      18.548,
+      98.4837
+    ],
+    "ride": "doi-inthanon",
+    "takenAt": "2025-05-10T08:03:37+07:00",
+    "featured": false
+  },
+  {
+    "id": "di-summit-shrine",
+    "file": "di-summit-shrine.jpg",
+    "alt": "A small forest shrine surrounded by statues, flowers and golden offering bowls",
+    "caption": "The summit shrine",
+    "location": "Doi Inthanon summit, Chiang Mai",
+    "coords": [
+      18.5891,
+      98.4868
+    ],
+    "ride": "doi-inthanon",
+    "takenAt": "2025-05-10T09:33:57+07:00",
+    "featured": false
+  },
+  {
+    "id": "di-highest-spot-sign",
+    "file": "di-highest-spot-sign.jpg",
+    "alt": "A traveller standing beneath a wooden sign reading The Highest Spot in Thailand",
+    "caption": "The highest spot in Thailand",
+    "location": "Doi Inthanon summit, Chiang Mai",
+    "coords": [
+      18.5891,
+      98.4868
+    ],
+    "ride": "doi-inthanon",
+    "takenAt": "2025-05-10T09:50:00+07:00",
+    "featured": false
+  },
+  {
+    "id": "di-highest-spot-road",
+    "file": "di-highest-spot-road.jpg",
+    "alt": "A traveller standing beside a road sign reading The Highest Spot in Thailand",
+    "caption": "The road to the top",
+    "location": "Doi Inthanon summit, Chiang Mai",
+    "coords": [
+      18.5891,
+      98.4868
+    ],
+    "ride": "doi-inthanon",
+    "takenAt": "2025-05-10T09:55:00+07:00",
+    "featured": false
+  },
+  {
+    "id": "di-royal-pagodas",
+    "file": "di-royal-pagodas.jpg",
+    "alt": "A royal pagoda rising above flower beds in thick fog",
+    "caption": "The royal pagodas in cloud",
+    "location": "Doi Inthanon, Chiang Mai",
+    "coords": [
+      18.5522,
+      98.4794
+    ],
+    "ride": "doi-inthanon",
+    "takenAt": "2025-05-10T11:34:10+07:00",
+    "featured": false
+  },
+  {
+    "id": "db-buddha-front",
+    "file": "db-buddha-front.jpg",
+    "alt": "A large teal seated Buddha with a gold-capped head against an overcast sky",
+    "caption": "The Daibutsu",
+    "location": "Wat Phra That Doi Phra Chan, Lampang",
+    "coords": [
+      18.1115,
+      99.4674
+    ],
+    "ride": "daibutsu",
+    "takenAt": "2024-12-14T10:54:43+07:00",
+    "featured": false
+  },
+  {
+    "id": "db-kitsune-crowd",
+    "file": "db-kitsune-crowd.jpg",
+    "alt": "A crowd of small white kitsune statues with red bibs on grey gravel",
+    "caption": "A thousand foxes",
+    "location": "Wat Phra That Doi Phra Chan, Lampang",
+    "coords": [
+      18.1113,
+      99.4674
+    ],
+    "ride": "daibutsu",
+    "takenAt": "2024-12-14T11:01:01+07:00",
+    "featured": false
+  },
+  {
+    "id": "db-kitsune-wall",
+    "file": "db-kitsune-wall.jpg",
+    "alt": "White fox statues with red bibs set into stone niches and on gravel below",
+    "caption": "The kitsune wall",
+    "location": "Wat Phra That Doi Phra Chan, Lampang",
+    "coords": [
+      18.1114,
+      99.4674
+    ],
+    "ride": "daibutsu",
+    "takenAt": "2024-12-14T11:01:14+07:00",
+    "featured": false
+  },
+  {
+    "id": "db-buddha-low",
+    "file": "db-buddha-low.jpg",
+    "alt": "A low angle up the teal Buddha's shoulder and face above a stone base",
+    "caption": "Looking up",
+    "location": "Wat Phra That Doi Phra Chan, Lampang",
+    "coords": [
+      18.1113,
+      99.4674
+    ],
+    "ride": "daibutsu",
+    "takenAt": "2024-12-14T11:01:36+07:00",
+    "featured": false
+  },
+  {
+    "id": "db-buddha-trees",
+    "file": "db-buddha-trees.jpg",
+    "alt": "The teal Buddha rising above trees beside a white stone pillar with Chinese characters",
+    "caption": "Above the trees",
+    "location": "Wat Phra That Doi Phra Chan, Lampang",
+    "coords": [
+      18.1118,
+      99.4674
+    ],
+    "ride": "daibutsu",
+    "takenAt": "2024-12-14T11:05:28+07:00",
+    "featured": false
+  },
+  {
+    "id": "db-golden-gate",
+    "file": "db-golden-gate.jpg",
+    "alt": "An ornate golden gate opening onto a green valley under heavy cloud",
+    "caption": "The golden gate",
+    "location": "Wat Phra That Doi Phra Chan, Lampang",
+    "coords": [
+      18.1131,
+      99.4686
+    ],
+    "ride": "daibutsu",
+    "takenAt": "2024-12-14T11:18:29+07:00",
+    "featured": false
+  }
+]

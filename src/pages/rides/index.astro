@@ -1,0 +1,106 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { getPhoto } from '../../lib/photos';
+import { getRides, totalDistance } from '../../lib/content';
+import { formatDistance, formatNumber } from '../../lib/format';
+import { SITE } from '../../config';
+
+const rides = await getRides();
+const distance = totalDistance(rides);
+const years = rides.map((ride) => ride.data.startDate.getFullYear());
+const from = Math.min(...years);
+const to = Math.max(...years);
+const yearLabel = from === to ? `${from}` : `${from}—${to}`;
+const ogImage = getPhoto(rides[0].data.cover);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Motorcycle journeys',
+  itemListElement: rides.map((ride, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: ride.data.title,
+    url: `${SITE.url}/rides/${ride.id}`,
+  })),
+};
+---
+
+<Base
+  title="Rides"
+  description={`Five journeys through Thailand and Vietnam — a New Year run from Chiang Mai to Pai, five days around Nan province, a day ride to the Daibutsu at Doi Phra Chan, a two-day ride from Da Nang to the Hai Van Pass and a day loop to Doi Inthanon. ${formatNumber(distance)} kilometres mapped so far.`}
+  image={ogImage}
+  schema={schema}
+>
+  <header class="page-head">
+    <div class="shell">
+      <p class="eyebrow"><span class="dot"></span> The journeys · {rides.length} {rides.length === 1 ? 'route' : 'routes'}</p>
+      <div class="page-head__grid">
+        <h1 class="h1">The long way,<br /><em>so far.</em></h1>
+        <div class="page-head__aside">
+          <p class="lede">
+            Five journeys, one notebook. A New Year run from Chiang Mai to Pai, five days around
+            Nan province — the bridge at Sapan, the Piang So sky road and the green hills in
+            between — a day ride south to the Daibutsu at Doi Phra Chan, a two-day ride from Da
+            Nang to the Hai Van Pass, and a day loop to the highest spot in Thailand.
+          </p>
+          <div class="page-head__meta">
+            <span>{formatNumber(distance)} km</span>
+            <span>{rides.length} {rides.length === 1 ? 'journey' : 'journeys'}</span>
+            <span>{yearLabel}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="shell" aria-label="All journeys">
+    <div class="ride-list">
+      {rides.map((ride, index) => (
+        <a class="ride-row" href={`/rides/${ride.id}`} data-reveal style={`--delay:${index}`}>
+          <span class="ride-row__index">{String(index + 1).padStart(2, '0')}</span>
+          <span class="ride-row__thumb">
+            <Image
+              src={getPhoto(ride.data.cover)}
+              alt={`${ride.data.title}, ${ride.data.region}`}
+              widths={[240, 400, 560]}
+              sizes="(max-width: 640px) 88px, 136px"
+              loading={index === 0 ? 'eager' : 'lazy'}
+            />
+          </span>
+          <span class="ride-row__main">
+            <span class="ride-row__region">
+              {ride.data.country} · {ride.data.season}
+            </span>
+            <span class="ride-row__title">{ride.data.title}</span>
+            <span class="ride-row__summary">{ride.data.summary}</span>
+          </span>
+          <span class="ride-row__stats">
+            {formatDistance(ride.data.distanceKm)}
+            <br />
+            {ride.data.days} {ride.data.days === 1 ? 'day' : 'days'}
+          </span>
+          <span class="ride-row__arrow" aria-hidden="true">→</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="rides-cta" aria-labelledby="rides-atlas">
+    <div class="shell rides-cta__inner">
+      <div>
+        <p class="eyebrow"><span class="dot"></span> The atlas</p>
+        <h2 class="h2" id="rides-atlas" style="margin-top:.7rem">Every route,<br /><em>one map.</em></h2>
+      </div>
+      <div class="rides-cta__body">
+        <p>
+          Zoom in, follow the road, or open the atlas to see every route at once.
+        </p>
+        <a class="btn btn--ghost" href="/atlas">
+          Open the atlas <span class="btn__arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

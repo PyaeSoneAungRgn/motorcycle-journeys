@@ -1,0 +1,96 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getPosts, type Post } from '../../lib/content';
+import { formatDate } from '../../lib/format';
+import { SITE } from '../../config';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const posts = await getPosts();
+const { Content } = await render(post);
+
+const index = posts.findIndex((item) => item.id === post.id);
+const newer = index > 0 ? posts[index - 1] : undefined;
+const older = index >= 0 && index < posts.length - 1 ? posts[index + 1] : undefined;
+const year = post.data.date.getUTCFullYear();
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date.toISOString(),
+  dateModified: post.data.date.toISOString(),
+  image: post.data.image ? new URL(post.data.image, SITE.url).toString() : undefined,
+  author: { '@type': 'Person', name: SITE.name, url: SITE.url },
+  publisher: { '@type': 'Person', name: SITE.name, url: SITE.url },
+  mainEntityOfPage: `${SITE.url}/posts/${post.id}`,
+  url: `${SITE.url}/posts/${post.id}`,
+};
+---
+
+<Base
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.image}
+  imageAlt={post.data.title}
+  type="article"
+  publishedTime={post.data.date}
+  schema={schema}
+>
+  <article class="post">
+    <header class="post-head">
+      <div class="shell">
+        <p class="eyebrow"><span class="dot"></span> Writing · {year}</p>
+        <h1 class="post-head__title">{post.data.title}</h1>
+        <div class="post-head__meta">
+          <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+          <span>{SITE.name}</span>
+          <span>From the archive</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="shell">
+      <div class="post-body">
+        <div class="prose post-prose">
+          <Content />
+        </div>
+      </div>
+
+      {(newer || older) && (
+        <nav class="post-nav" aria-label="More writing">
+          {older ? (
+            <a class="post-nav__item" href={`/posts/${older.id}`}>
+              <span class="post-nav__label">← Older</span>
+              <span class="post-nav__title">{older.data.title}</span>
+            </a>
+          ) : (
+            <span></span>
+          )}
+          {newer ? (
+            <a class="post-nav__item post-nav__item--next" href={`/posts/${newer.id}`}>
+              <span class="post-nav__label">Newer →</span>
+              <span class="post-nav__title">{newer.data.title}</span>
+            </a>
+          ) : (
+            <span></span>
+          )}
+        </nav>
+      )}
+
+      <div class="section-foot">
+        <a class="link" href="/posts">← All writing</a>
+      </div>
+    </div>
+  </article>
+</Base>

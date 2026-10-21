@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro';
+import PhotoGrid from '../components/PhotoGrid.astro';
+import { getPhotos, getRides } from '../lib/content';
+import { getPhoto } from '../lib/photos';
+import { toGalleryItem, type GalleryItem } from '../lib/gallery';
+import { formatNumber } from '../lib/format';
+
+const rides = await getRides();
+const photos = await getPhotos();
+
+const items: GalleryItem[] = photos.map((photo) => {
+  const item = toGalleryItem(photo);
+  return { ...item, ride: item.ride ?? 'elsewhere' };
+});
+
+/**
+ * Shuffle the archive so it reads as a contact sheet rather than a chronological
+ * wall of near-identical frames. Reshuffled on every build.
+ */
+const shuffled = [...items];
+for (let i = shuffled.length - 1; i > 0; i -= 1) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+}
+
+const rideIds = new Set(rides.map((ride) => ride.id));
+const counts = new Map<string, number>([['all', items.length]]);
+items.forEach((item) => {
+  if (!item.ride || !rideIds.has(item.ride)) return;
+  counts.set(item.ride, (counts.get(item.ride) ?? 0) + 1);
+});
+const elsewhere = items.filter((item) => !item.ride || !rideIds.has(item.ride)).length;
+
+const countries = [...new Set(rides.map((ride) => ride.data.country))];
+const ogImage = getPhoto('nan-sky-road.jpg');
+---
+
+<Base
+  title="Photographs"
+  description="Photographs from Thailand and Vietnam — Chiang Mai, Pai, the Nan Loop, the Daibutsu at Doi Phra Chan, the Hai Van Pass and Doi Inthanon, from mountain viewpoints to roadside khao soi."
+  image={ogImage}
+>
+  <header class="page-head">
+    <div class="shell">
+      <p class="eyebrow"><span class="dot"></span> The archive · {formatNumber(photos.length)} frames</p>
+      <div class="page-head__grid">
+        <h1 class="h1" id="photographs-heading">Field notes,<br /><em>in colour.</em></h1>
+        <div class="page-head__aside">
+          <p class="lede">
+            Temples, roadside food, mountain roads, cherry blossoms, a white Lady Buddha, a
+            cloud sea and the light at either end of the day. Photographed on a small camera and a
+            phone, catalogued so the good ones do not disappear into a hard drive.
+          </p>
+          <div class="page-head__meta">
+            <span>{formatNumber(photos.length)} photographs</span>
+            <span>{countries.length === 1 ? countries[0] : `${countries.length} countries`}</span>
+            <span>Digital</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="shell" aria-label="Photograph archive">
+    <div
+      class="filter-bar"
+      data-filter-group
+      data-filter-target="#photo-grid"
+      data-filter-noun="photograph"
+    >
+      <div class="chips" role="group" aria-label="Filter photographs by journey">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">
+          All <span class="chip__count">{items.length}</span>
+        </button>
+        {rides.map((ride) => (
+          <button class="chip" type="button" data-filter={ride.id} aria-pressed="false">
+            {ride.data.mapLabel ?? ride.data.country} <span class="chip__count">{counts.get(ride.id) ?? 0}</span>
+          </button>
+        ))}
+        {elsewhere > 0 && (
+          <button class="chip" type="button" data-filter="elsewhere" aria-pressed="false">
+            Elsewhere <span class="chip__count">{elsewhere}</span>
+          </button>
+        )}
+      </div>
+      <p class="filter-bar__count" data-filter-count aria-live="polite">
+        {formatNumber(items.length)} photographs
+      </p>
+    </div>
+
+    <div id="photo-grid">
+      <PhotoGrid items={shuffled} labelledBy="photographs-heading" />
+      <p class="empty-state" hidden>No photographs in this collection yet.</p>
+    </div>
+  </section>
+
+  <script>
+    import '../scripts/filters';
+  </script>
+</Base>

@@ -1,0 +1,158 @@
+---
+import { getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import PhotoGrid from '../../components/PhotoGrid.astro';
+import RouteMap from '../../components/RouteMap.astro';
+import VlogPlayer from '../../components/VlogPlayer.astro';
+import { getPhotos, getVlogs, neighbours, stillsForVlog, toMapRoute, type Vlog } from '../../lib/content';
+import { getPhoto } from '../../lib/photos';
+import { durationToIso, formatDate, formatDistance } from '../../lib/format';
+import { youtubeThumb, youtubeUrl } from '../../lib/youtube';
+import { SITE } from '../../config';
+
+export async function getStaticPaths() {
+  const vlogs = await getVlogs();
+  return vlogs.map((vlog) => ({ params: { id: vlog.id }, props: { vlog } }));
+}
+
+interface Props {
+  vlog: Vlog;
+}
+
+const { vlog } = Astro.props;
+const ride = await getEntry('rides', vlog.data.ride.id);
+if (!ride) throw new Error(`Vlog "${vlog.id}" references a missing ride.`);
+
+const vlogs = await getVlogs();
+const photos = await getPhotos();
+const other = neighbours(vlogs, vlog.id).next ?? vlogs[0];
+const stills = stillsForVlog(photos, vlog, ride.id, 3);
+const mapRoute = toMapRoute(ride);
+const { Content } = await render(vlog);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: vlog.data.title,
+  description: vlog.data.summary,
+  thumbnailUrl: [youtubeThumb(vlog.data.youtubeId, 'maxresdefault'), youtubeThumb(vlog.data.youtubeId, 'hqdefault')],
+  uploadDate: vlog.data.publishedAt.toISOString(),
+  duration: durationToIso(vlog.data.duration),
+  embedUrl: `https://www.youtube-nocookie.com/embed/${vlog.data.youtubeId}`,
+  contentUrl: youtubeUrl(vlog.data.youtubeId),
+  author: { '@type': 'Person', name: SITE.name, url: SITE.url },
+  publisher: { '@type': 'Person', name: SITE.name, url: SITE.url },
+};
+---
+
+<Base
+  title={vlog.data.title}
+  description={vlog.data.summary}
+  image={getPhoto(vlog.data.poster)}
+  imageAlt={`Still from ${vlog.data.title}`}
+  type="article"
+  publishedTime={vlog.data.publishedAt}
+  schema={schema}
+>
+  <article>
+    <header class="vlog-detail__head">
+      <div class="shell">
+        <p class="eyebrow">
+          <span class="dot"></span> Film · Ep. {String(vlog.data.episode).padStart(2, '0')} · {ride.data.country}
+        </p>
+        <h1 class="h1">{vlog.data.title}</h1>
+        <div class="vlog-detail__meta">
+          <span>{formatDate(vlog.data.publishedAt)}</span>
+          <span>{vlog.data.duration}</span>
+          <span>{vlog.data.location}</span>
+          <a class="link" href={`/rides/${ride.id}`}>{ride.data.title}</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="shell">
+      <div class="vlog-detail__player" data-reveal>
+        <VlogPlayer
+          youtubeId={vlog.data.youtubeId}
+          title={vlog.data.title}
+          duration={vlog.data.duration}
+          episode={vlog.data.episode}
+          poster={getPhoto(vlog.data.poster)}
+        />
+      </div>
+
+      <div class="vlog-detail__grid">
+        <div class="prose">
+          <p>{vlog.data.summary}</p>
+          <Content />
+        </div>
+        <aside class="vlog-detail__aside">
+          <dl class="facts">
+            <div class="facts__item">
+              <dt>Episode</dt>
+              <dd>{String(vlog.data.episode).padStart(2, '0')}</dd>
+            </div>
+            <div class="facts__item">
+              <dt>Duration</dt>
+              <dd>{vlog.data.duration}</dd>
+            </div>
+            <div class="facts__item">
+              <dt>Filmed in</dt>
+              <dd>{vlog.data.location}</dd>
+            </div>
+            <div class="facts__item">
+              <dt>Journey</dt>
+              <dd>{formatDistance(ride.data.distanceKm)}</dd>
+            </div>
+          </dl>
+          <a class="btn btn--ghost" href={`/rides/${ride.id}`}>
+            The ride journal <span class="btn__arrow" aria-hidden="true">→</span>
+          </a>
+        </aside>
+      </div>
+
+      <section class="route-block" aria-labelledby="film-route">
+        <div class="route-block__map" data-reveal>
+          <RouteMap
+            routes={[mapRoute]}
+            mode="detail"
+            height="460px"
+            legend
+            marker={
+              vlog.data.coords
+                ? { lat: vlog.data.coords[0], lng: vlog.data.coords[1], label: 'Filmed here' }
+                : undefined
+            }
+            label={`Route map for ${ride.data.title}`}
+          />
+        </div>
+        <div class="route-block__copy">
+          <SectionHeading number="01" title="On the map" id="film-route" />
+          <p class="prose" style="font-size:1rem">
+            Filmed along the {ride.data.title} — {ride.data.region},
+            {ride.data.country}. The marker shows where this episode was shot.
+          </p>
+          <a class="arrow-link" href={`/rides/${ride.id}`}>
+            Read the route notes <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </section>
+
+      {stills.length > 0 && (
+        <section class="ride-gallery" aria-labelledby="film-stills">
+          <SectionHeading number="02" title="Stills" note={`From the ${ride.data.title}`} id="film-stills" />
+          <PhotoGrid items={stills} labelledBy="film-stills" />
+        </section>
+      )}
+
+      <a class="next-ride" href={`/vlogs/${other.id}`}>
+        <span>
+          <span class="next-ride__label">Another film</span>
+          <span class="next-ride__title">{other.data.title}</span>
+        </span>
+        <span class="next-ride__arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </article>
+</Base>

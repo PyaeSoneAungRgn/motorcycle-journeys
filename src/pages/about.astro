@@ -1,0 +1,118 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { getPhoto } from '../lib/photos';
+import { getPhotos, getRides, journalSince, totalDistance } from '../lib/content';
+import { formatNumber } from '../lib/format';
+import { SITE } from '../config';
+
+const rides = await getRides();
+const photos = await getPhotos();
+const distance = totalDistance(rides);
+const since = journalSince(rides);
+const portrait = getPhoto('cm-khun-chang-khian-sign.jpg');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE.name,
+  url: SITE.url,
+  description: SITE.description,
+  jobTitle: 'Motorcycle traveller',
+  sameAs: [SITE.socials.youtube],
+  email: `mailto:${SITE.email}`,
+};
+---
+
+<Base
+  title="About"
+  description="Pyae Sone Aung — a rider taking the long way through Thailand and Vietnam, renting whatever motorcycle is going and taking the odd picture along the way."
+  image={portrait}
+  schema={schema}
+>
+  <header class="page-head">
+    <div class="shell">
+      <p class="eyebrow"><span class="dot"></span> About</p>
+      <div class="page-head__grid">
+        <h1 class="h1">A quiet<br /><em>obsession.</em></h1>
+        <div class="page-head__aside">
+          <p class="lede">
+            Slow roads, small towns and the odd picture picked up along the way — five journeys so
+            far, from Doi Inthanon and Da Nang to the Hai Van Pass, the Daibutsu at Doi Phra Chan,
+            Chiang Mai to Pai, and five days around Nan province.
+          </p>
+          <div class="page-head__meta">
+            <span>{formatNumber(distance)} km ridden</span>
+            <span>{photos.length} photographs</span>
+            <span>{rides.length} {rides.length === 1 ? 'journey' : 'journeys'}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="shell">
+    <div class="about-grid">
+      <figure class="frame" data-reveal>
+        <span class="frame__mat">
+          <Image
+            src={portrait}
+            alt="A traveller standing at a wooden railing above a hazy mountain valley at sunrise"
+            widths={[480, 720, 960]}
+            sizes="(max-width: 1080px) 92vw, 40vw"
+            loading="lazy"
+          />
+        </span>
+        <figcaption>
+          <span class="loc">Khun Chang Khian</span>
+          <span>Chiang Mai, Thailand</span>
+        </figcaption>
+      </figure>
+
+      <div class="about-copy" data-reveal>
+        <p class="eyebrow"><span class="dot"></span> Rider · Random snapshots</p>
+        <div class="prose">
+          <p>
+            I ride slowly and take random pictures when something looks worth stopping for — no
+            plan, no fancy camera. The motorcycle is whatever I can rent that week: a small Honda
+            Wave, a scooter, anything with two wheels and a full tank.
+          </p>
+          <p>
+            Five journeys so far: a day ride from Chiang Mai to Doi Inthanon, a day run south to the
+            Daibutsu at Doi Phra Chan, two days in Vietnam from Da Nang over the Hai Van Pass, a New
+            Year week from Chiang Mai to Pai, and five days around Nan province. Take the smaller
+            road when there is one, stop for tea, and don't trust a weather forecast in the
+            mountains. Nothing here is sponsored.
+          </p>
+        </div>
+
+        <dl class="facts">
+          <div class="facts__item">
+            <dt>First ride</dt>
+            <dd>{since}</dd>
+          </div>
+          <div class="facts__item">
+            <dt>Machine</dt>
+            <dd>Whatever I can rent</dd>
+          </div>
+          <div class="facts__item">
+            <dt>Camera</dt>
+            <dd>Phone &amp; a small camera</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <section class="about-section" aria-labelledby="about-elsewhere">
+      <SectionHeading number="01" title="Elsewhere" note="Say hello" id="about-elsewhere" />
+      <div class="about-section__grid">
+        <p class="mono muted">Off the bike</p>
+        <ul class="kit-list">
+          <li><span class="no">↗</span><span><a class="link" href={SITE.socials.youtube} rel="me noopener">YouTube — films from the road</a></span></li>
+          <li><span class="no">↗</span><span><a class="link" href={`mailto:${SITE.email}`}>Email — routes, questions, or a better road</a></span></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</Base>

@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import PlaceCard from '../components/PlaceCard.astro';
+import { getPlaces } from '../lib/content';
+import { getPhoto } from '../lib/photos';
+
+const places = await getPlaces();
+const years = places.map((place) => place.data.publishedAt.getFullYear());
+const from = years.length ? Math.min(...years) : 2024;
+const to = years.length ? Math.max(...years) : 2025;
+const yearLabel = from === to ? `${from}` : `${from}–${to}`;
+const ogImage = places.length ? getPhoto(places[0].data.poster) : getPhoto('nan-sky-road.jpg');
+---
+
+<Base
+  title="Other places"
+  description="One-off motorcycle films from the roads around Chiang Mai — Mon Jam, Samoeng Forest, Mae Kampong, Doi Pui, Tha Phae Gate and the places between."
+  image={ogImage}
+>
+  <header class="page-head">
+    <div class="shell">
+      <p class="eyebrow"><span class="dot"></span> Elsewhere · {places.length} films</p>
+      <div class="page-head__grid">
+        <h1 class="h1">Other<br /><em>places.</em></h1>
+        <div class="page-head__aside">
+          <p class="lede">
+            The rides that never became a journal — a reservoir, a temple, a village in the hills,
+            a gate in the old city. One film each, all within a day of Chiang Mai.
+          </p>
+          <div class="page-head__meta">
+            <span>{places.length} films</span>
+            <span>{yearLabel}</span>
+            <span>Chiang Mai</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="shell" aria-labelledby="places-list">
+    <SectionHeading
+      number="01"
+      title="The films"
+      note={`${places.length} rides`}
+      link={{ href: '/vlogs', label: 'The numbered episodes' }}
+      id="places-list"
+    />
+
+    <div class="place-grid">
+      {places.map((place, index) => (
+        <div data-reveal style={`--delay:${index + 1}`}>
+          <PlaceCard
+            href={`https://www.youtube.com/watch?v=${place.data.youtubeId}`}
+            title={place.data.title}
+            location={place.data.location}
+            year={place.data.publishedAt.getFullYear()}
+            duration={place.data.duration}
+            summary={place.data.summary}
+            poster={getPhoto(place.data.poster)}
+          />
+        </div>
+      ))}
+    </div>
+
+    <p class="place-note">
+      One-off rides, kept outside the numbered journal. Each card opens the film on YouTube.
+    </p>
+  </section>
+</Base>

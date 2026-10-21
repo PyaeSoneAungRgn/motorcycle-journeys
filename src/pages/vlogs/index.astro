@@ -1,0 +1,162 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import VlogCard from '../../components/VlogCard.astro';
+import VlogPlayer from '../../components/VlogPlayer.astro';
+import { getVlogs, getRides } from '../../lib/content';
+import { getPhoto } from '../../lib/photos';
+import { formatDate } from '../../lib/format';
+
+const vlogs = await getVlogs();
+const rides = await getRides();
+const featured = vlogs.find((vlog) => vlog.data.featured) ?? vlogs[0];
+const featuredRide = featured
+  ? rides.find((ride) => ride.id === featured.data.ride.id)
+  : undefined;
+const rest = featured ? vlogs.filter((vlog) => vlog.id !== featured.id) : [];
+const vlogRideIds = [...new Set(vlogs.map((vlog) => vlog.data.ride.id))];
+const scopeLabel =
+  vlogRideIds.length === 1 && featuredRide
+    ? featuredRide.data.mapLabel
+    : `${vlogRideIds.length} journeys`;
+const firstRide = rides[0];
+const still = getPhoto(firstRide.data.cover);
+const ogImage = featured ? getPhoto(featured.data.poster) : getPhoto('nan-sky-road.jpg');
+
+const years = vlogs.map((vlog) => vlog.data.publishedAt.getFullYear());
+const from = years.length ? Math.min(...years) : 2026;
+const to = years.length ? Math.max(...years) : 2026;
+const yearLabel = from === to ? `${from}` : `${from}—${to}`;
+---
+
+<Base
+  title="Vlogs"
+  description="Films from the road: motorcycle travel episodes from Doi Inthanon, the Daibutsu at Doi Phra Chan, Da Nang to the Hai Van Pass, Chiang Mai to Pai and around Nan province — the curves, the cherry blossoms and the long quiet bits in between."
+  image={ogImage}
+  noindex={vlogs.length === 0}
+>
+  <header class="page-head">
+    <div class="shell">
+      <p class="eyebrow">
+        <span class="dot"></span> The films · {vlogs.length === 0 ? 'In production' : `${vlogs.length} episodes`}
+      </p>
+      <div class="page-head__grid">
+        <h1 class="h1">Films from<br /><em>the road.</em></h1>
+        <div class="page-head__aside">
+          <p class="lede">
+            No drone shots, no voiceover for the first six minutes. Just a camera on the bike,
+            weather moving in, and the occasional stop for tea.
+          </p>
+          <div class="page-head__meta">
+            <span>{vlogs.length === 0 ? 'First episode soon' : `${vlogs.length} episodes`}</span>
+            <span>{yearLabel}</span>
+            <span>{scopeLabel}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {vlogs.length === 0 ? (
+    <section class="shell" aria-labelledby="vlog-pending">
+      <div class="vlog-empty">
+        <figure class="frame" data-reveal>
+          <span class="frame__mat">
+            <Image
+              src={still}
+              alt={`${firstRide.data.title}, ${firstRide.data.region}`}
+              widths={[640, 960, 1280]}
+              sizes="(max-width: 1080px) 92vw, 58vw"
+              loading="lazy"
+            />
+          </span>
+          <figcaption>
+            <span class="loc">{firstRide.data.region}</span>
+            <span>Still from the rushes</span>
+          </figcaption>
+        </figure>
+
+        <div class="vlog-empty__copy" data-reveal>
+          <p class="eyebrow"><span class="dot"></span> The first film</p>
+          <h2 class="h2" id="vlog-pending">The first film is in the edit.</h2>
+          <p class="lede">
+            Footage from Chiang Mai, Pai and Nan is being cut into episodes. They will appear here
+            as they are finished — the photographs and route notes are already online.
+          </p>
+          {firstRide && (
+            <a class="btn btn--solid" href={`/rides/${firstRide.id}`}>
+              Read the {firstRide.data.title} journal <span class="btn__arrow" aria-hidden="true">→</span>
+            </a>
+          )}
+          {firstRide && firstRide.data.clips.length > 0 && (
+            <a class="arrow-link" href={`/rides/${firstRide.id}#short-films`}>
+              Watch the short clips <span class="arrow" aria-hidden="true">→</span>
+            </a>
+          )}
+        </div>
+      </div>
+    </section>
+  ) : (
+    <>
+      <section class="shell" aria-labelledby="latest-film">
+        {featured && (
+          <div class="vlog-feature">
+            <div class="vlog-feature__media" data-reveal>
+              <VlogPlayer
+                youtubeId={featured.data.youtubeId}
+                title={featured.data.title}
+                duration={featured.data.duration}
+                episode={featured.data.episode}
+                poster={getPhoto(featured.data.poster)}
+              />
+            </div>
+            <div class="vlog-feature__aside" data-reveal>
+              <p class="eyebrow">
+                <span class="dot"></span> Latest film · Ep. {String(featured.data.episode).padStart(2, '0')}
+              </p>
+              <h2 class="vlog-feature__title" id="latest-film">
+                <a href={`/vlogs/${featured.id}`}>{featured.data.title}</a>
+              </h2>
+              <p class="featured__text">{featured.data.summary}</p>
+              <div class="vlog-feature__meta">
+                <span>{formatDate(featured.data.publishedAt)}</span>
+                <span>{featured.data.duration}</span>
+                <span>{featured.data.location}</span>
+              </div>
+              <a class="arrow-link" href={`/vlogs/${featured.id}`}>
+                Episode notes <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        )}
+
+        {rest.length > 0 && (
+          <>
+            <SectionHeading
+              number="01"
+              title="All episodes"
+              note={`${vlogs.length} films`}
+              link={{ href: '/places', label: 'Other places' }}
+              id="all-films"
+            />
+            <div class:list={['vlog-grid', rest.length === 4 && 'vlog-grid--two']}>
+              {rest.map((vlog, index) => (
+                <div data-reveal style={`--delay:${index + 1}`}>
+                  <VlogCard
+                    href={`/vlogs/${vlog.id}`}
+                    title={vlog.data.title}
+                    episode={vlog.data.episode}
+                    duration={vlog.data.duration}
+                    location={vlog.data.location}
+                    poster={getPhoto(vlog.data.poster)}
+                  />
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </section>
+    </>
+  )}
+</Base>

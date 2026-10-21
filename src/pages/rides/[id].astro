@@ -1,0 +1,267 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import PhotoGrid from '../../components/PhotoGrid.astro';
+import ShortFilms from '../../components/ShortFilms.astro';
+import TimeLapse from '../../components/TimeLapse.astro';
+import RouteMap from '../../components/RouteMap.astro';
+import VlogPlayer from '../../components/VlogPlayer.astro';
+import VlogCard from '../../components/VlogCard.astro';
+import { getPhoto } from '../../lib/photos';
+import {
+  vlogsForRide,
+  getPhotos,
+  getRides,
+  getVlogs,
+  photosForRide,
+  toMapRoute,
+  type Ride,
+} from '../../lib/content';
+import { formatDate, formatDistance } from '../../lib/format';
+import { SITE } from '../../config';
+
+export async function getStaticPaths() {
+  const rides = await getRides();
+  return rides.map((ride) => ({ params: { id: ride.id }, props: { ride } }));
+}
+
+interface Props {
+  ride: Ride;
+}
+
+const { ride } = Astro.props;
+const rides = await getRides();
+const photos = await getPhotos();
+const vlogs = await getVlogs();
+
+const ridePhotos = photosForRide(photos, ride.id);
+const rideVlogs = vlogsForRide(vlogs, ride.id);
+const order = rides.findIndex((item) => item.id === ride.id);
+const next = rides.length > 1 ? rides[(order + 1) % rides.length] : undefined;
+const cover = getPhoto(ride.data.cover);
+const mapRoute = toMapRoute(ride);
+const { Content } = await render(ride);
+const season = ride.data.season;
+const hasClips = ride.data.clips.length > 0;
+const timeLapses = ride.data.timeLapses;
+
+let sectionCount = 0;
+const nextSection = () => String(++sectionCount).padStart(2, '0');
+const clipsNumber = hasClips ? nextSection() : null;
+const timeLapseNumber = timeLapses.length > 0 ? nextSection() : null;
+const filmNumber = rideVlogs.length > 0 ? nextSection() : null;
+const photosNumber = nextSection();
+const routeNumber = nextSection();
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: ride.data.title,
+  description: ride.data.summary,
+  image: new URL(cover.src, SITE.url).href,
+  datePublished: ride.data.startDate.toISOString(),
+  dateModified: ride.data.endDate?.toISOString() ?? ride.data.startDate.toISOString(),
+  author: { '@type': 'Person', name: SITE.name, url: SITE.url },
+  publisher: { '@type': 'Person', name: SITE.name, url: SITE.url },
+  mainEntityOfPage: `${SITE.url}/rides/${ride.id}`,
+  keywords: [ride.data.region, ride.data.country, 'motorcycle travel'],
+};
+---
+
+<Base
+  title={ride.data.title}
+  description={ride.data.summary}
+  image={cover}
+  imageAlt={`${ride.data.region}, ${ride.data.country}`}
+  type="article"
+  publishedTime={ride.data.startDate}
+  schema={schema}
+>
+  <article>
+    <header class="ride-hero">
+      <div class="shell">
+        <p class="eyebrow">
+          <span class="dot"></span> Journey {String(order + 1).padStart(2, '0')} · {ride.data.country} · {season}
+        </p>
+
+        <div class="ride-hero__grid">
+          <h1 class="h1">{ride.data.title}</h1>
+          <div class="ride-hero__aside">
+            <p class="lede ride-hero__summary">{ride.data.summary}</p>
+            <a class="arrow-link" href="/atlas">
+              Open the atlas <span class="arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+        <dl class="stats">
+          <div class="stats__item">
+            <dt>Distance</dt>
+            <dd>{formatDistance(ride.data.distanceKm)}</dd>
+          </div>
+          <div class="stats__item">
+            <dt>Days</dt>
+            <dd>{ride.data.days}</dd>
+          </div>
+          <div class="stats__item">
+            <dt>Season</dt>
+            <dd>{season}</dd>
+          </div>
+          <div class="stats__item">
+            <dt>Bike</dt>
+            <dd>{ride.data.bike}</dd>
+          </div>
+        </dl>
+
+        <figure class="ride-cover frame" data-reveal>
+          <span class="frame__mat">
+            <Image
+              src={cover}
+              alt={`${ride.data.region}, ${ride.data.country}`}
+              widths={[800, 1200, 1600]}
+              sizes="(max-width: 1240px) 92vw, 1150px"
+              priority
+            />
+          </span>
+          <figcaption>
+            <span class="loc">{ride.data.region}, {ride.data.country}</span>
+            <span>{formatDate(ride.data.startDate)}</span>
+          </figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <div class="shell">
+      <div class="ride-body">
+        <aside class="ride-body__aside">
+          <span class="ride-body__label">From the notebook</span>
+          <p>
+            Ridden without a support vehicle — one bike, a tank bag and a plan that changed most
+            mornings.
+          </p>
+          <span class="ride-body__label">First stop</span>
+          <p>
+            {ride.data.stops[0].name}
+            <br />
+            {formatDistance(ride.data.distanceKm)} · {ride.data.days} {ride.data.days === 1 ? 'day' : 'days'}
+          </p>
+        </aside>
+        <div class="prose">
+          <Content />
+        </div>
+      </div>
+
+      {hasClips && <ShortFilms clips={ride.data.clips} number={clipsNumber ?? '01'} />}
+
+      {timeLapses.length > 0 && (
+        <TimeLapse timeLapses={timeLapses} number={timeLapseNumber ?? '02'} />
+      )}
+
+      {rideVlogs.length > 0 && (
+        <section class="ride-vlog" aria-labelledby="ride-film">
+          <SectionHeading
+            number={filmNumber ?? '03'}
+            title={rideVlogs.length > 1 ? 'The films' : 'The film'}
+            note={
+              rideVlogs.length > 1
+                ? `${rideVlogs.length} episodes`
+                : `Ep. ${rideVlogs[0].data.episode} · ${rideVlogs[0].data.duration}`
+            }
+            link={
+              rideVlogs.length > 1
+                ? { href: '/vlogs', label: 'All episodes' }
+                : { href: `/vlogs/${rideVlogs[0].id}`, label: 'Episode notes' }
+            }
+            id="ride-film"
+          />
+          {rideVlogs.length === 1 ? (
+            <div class="ride-vlog__inner">
+              <VlogPlayer
+                youtubeId={rideVlogs[0].data.youtubeId}
+                title={rideVlogs[0].data.title}
+                duration={rideVlogs[0].data.duration}
+                episode={rideVlogs[0].data.episode}
+                poster={getPhoto(rideVlogs[0].data.poster)}
+              />
+              <div>
+                <h3 class="h3">
+                  <a class="link" href={`/vlogs/${rideVlogs[0].id}`}>{rideVlogs[0].data.title}</a>
+                </h3>
+                <p class="prose" style="font-size:1rem;margin-top:.75rem">
+                  {rideVlogs[0].data.summary}
+                </p>
+                <p class="mono muted" style="margin-top:1rem">{rideVlogs[0].data.location}</p>
+              </div>
+            </div>
+          ) : (
+            <div class="vlog-grid vlog-grid--two">
+              {rideVlogs.map((episode, index) => (
+                <div data-reveal style={`--delay:${index + 1}`}>
+                  <VlogCard
+                    href={`/vlogs/${episode.id}`}
+                    title={episode.data.title}
+                    episode={episode.data.episode}
+                    duration={episode.data.duration}
+                    location={episode.data.location}
+                    poster={getPhoto(episode.data.poster)}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+
+      {ridePhotos.length > 0 && (
+        <section class="ride-gallery" aria-labelledby="ride-photos">
+          <SectionHeading
+            number={photosNumber}
+            title="Photographs"
+            note={`${ridePhotos.length} frames`}
+            link={{ href: '/photos', label: 'Full archive' }}
+            id="ride-photos"
+          />
+          <PhotoGrid items={ridePhotos} labelledBy="ride-photos" />
+        </section>
+      )}
+
+      <section class="route-block" aria-labelledby="ride-route">
+        <div class="route-block__map" data-reveal>
+          <RouteMap
+            routes={[mapRoute]}
+            mode="detail"
+            height="480px"
+            legend
+            label={`Route map of ${ride.data.title}`}
+          />
+        </div>
+        <div class="route-block__copy">
+          <SectionHeading number={routeNumber} title="The route" id="ride-route" />
+          <ol class="stop-list">
+            {ride.data.stops.map((stop, index) => (
+              <li class="stop">
+                <span class="stop__no">{String(index + 1).padStart(2, '0')}</span>
+                <span>
+                  <span class="stop__name">{stop.name}</span>
+                  {stop.note && <span class="stop__note">{stop.note}</span>}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {next && (
+        <a class="next-ride" href={`/rides/${next.id}`}>
+          <span>
+            <span class="next-ride__label">Next journey</span>
+            <span class="next-ride__title">{next.data.title}</span>
+          </span>
+          <span class="next-ride__arrow" aria-hidden="true">→</span>
+        </a>
+      )}
+    </div>
+  </article>
+</Base>

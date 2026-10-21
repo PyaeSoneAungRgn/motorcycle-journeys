@@ -1,0 +1,21 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  note?: string;
+  link?: { href: string; label: string };
+  id?: string;
+}
+const { number, title, note, link, id } = Astro.props;
+---
+
+<div class="section-head" id={id}>
+  <span class="section-head__num">{number}</span>
+  <h2>{title}</h2>
+  {note && <span class="section-head__note">{note}</span>}
+  {link && (
+    <a class="arrow-link section-head__more" href={link.href}>
+      {link.label} <span class="arrow" aria-hidden="true">→</span>
+    </a>
+  )}
+</div>

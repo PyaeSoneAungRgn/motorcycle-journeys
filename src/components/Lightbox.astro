@@ -1,0 +1,38 @@
+<dialog id="lightbox" class="lightbox" aria-label="Photograph viewer" aria-modal="true">
+  <div class="lightbox__bar">
+    <p class="lightbox__count" data-lightbox-count aria-live="polite">—</p>
+    <form method="dialog">
+      <button class="lightbox__close" type="submit">
+        Close <span aria-hidden="true">✕</span>
+      </button>
+    </form>
+  </div>
+
+  <div class="lightbox__stage">
+    <button
+      class="lightbox__nav lightbox__nav--prev"
+      type="button"
+      data-lightbox-prev
+      aria-label="Previous photograph"
+    >
+      ←
+    </button>
+    <img class="lightbox__img" data-lightbox-img alt="" decoding="async" />
+    <button
+      class="lightbox__nav lightbox__nav--next"
+      type="button"
+      data-lightbox-next
+      aria-label="Next photograph"
+    >
+      →
+    </button>
+  </div>
+
+  <div class="lightbox__caption">
+    <div>
+      <p class="lightbox__caption-main" data-lightbox-caption></p>
+      <p class="lightbox__caption-loc" data-lightbox-location></p>
+    </div>
+    <p class="lightbox__film" data-lightbox-film></p>
+  </div>
+</dialog>

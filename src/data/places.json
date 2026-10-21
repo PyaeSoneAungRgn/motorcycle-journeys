@@ -1,0 +1,210 @@
+[
+  {
+    "id": "doi-pui-down",
+    "title": "Doi Pui, coming down",
+    "location": "Doi Pui, Chiang Mai",
+    "region": "Chiang Mai Province",
+    "country": "Thailand",
+    "coords": [
+      18.8166,
+      98.8891
+    ],
+    "publishedAt": "2025-12-29",
+    "duration": "11:51",
+    "youtubeId": "n50q8qdQRXM",
+    "poster": "pl-doi-pui-down.jpg",
+    "summary": "The long way down from the viewpoint, through the trees and back into the city."
+  },
+  {
+    "id": "samoeng-forest",
+    "title": "Samoeng Forest",
+    "location": "Samoeng, Chiang Mai",
+    "region": "Chiang Mai Province",
+    "country": "Thailand",
+    "coords": [
+      18.8478,
+      98.732
+    ],
+    "publishedAt": "2025-05-01",
+    "duration": "35:26",
+    "youtubeId": "iG-FsBA2odM",
+    "poster": "pl-samoeng-forest.jpg",
+    "summary": "A storm building over the Samoeng road — rain, fallen trees and a long afternoon in the forest."
+  },
+  {
+    "id": "khun-chang-khian-village",
+    "title": "Khun Chang Khian Village",
+    "location": "Khun Chang Khian, Chiang Mai",
+    "region": "Chiang Mai Province",
+    "country": "Thailand",
+    "coords": [
+      18.8399,
+      98.8981
+    ],
+    "publishedAt": "2025-02-16",
+    "duration": "20:02",
+    "youtubeId": "OzEmmkQK700",
+    "poster": "pl-khun-chang-khian-village.jpg",
+    "summary": "The climb to the village on Doi Suthep, under the trees and past the turns."
+  },
+  {
+    "id": "giant-trees-alley",
+    "title": "Giant Trees Alley",
+    "location": "Chiang Dao, Chiang Mai",
+    "region": "Chiang Mai Province",
+    "country": "Thailand",
+    "coords": [
+      19.3838,
+      98.9398
+    ],
+    "publishedAt": "2025-02-09",
+    "duration": "50:28",
+    "youtubeId": "IWhhKT1jFmA",
+    "poster": "pl-giant-trees-alley.jpg",
+    "summary": "The road beneath the giant trees in Chiang Dao, and the long ride north to reach it."
+  },
+  {
+    "id": "mon-jam",
+    "title": "Mon Jam",
+    "location": "Mae Rim, Chiang Mai",
+    "region": "Chiang Mai Province",
+    "country": "Thailand",
+    "coords": [
+      18.9484,
+      98.7945
+    ],
+    "publishedAt": "2024-11-25",
+    "duration": "1:53:01",
+    "youtubeId": "IL8j2sYam-U",
+    "poster": "pl-mon-jam.jpg",
+    "summary": "Lavender beds and a long view over the Mae Rim valley."
+  },
+  {
+    "id": "the-giant-tree",
+    "title": "The Giant Tree",
+    "location": "Mae On, Chiang Mai",
+    "region": "Chiang Mai Province",
+    "country": "Thailand",
+    "coords": [
+      18.8926,
+      99.3515
+    ],
+    "publishedAt": "2024-10-19",
+    "duration": "29:51",
+    "youtubeId": "heoZtb3MBU8",
+    "poster": "pl-the-giant-tree.jpg",
+    "summary": "Out to the giant tree at Mae On, through the valley and the back roads."
+  },
+  {
+    "id": "mae-kampong",
+    "title": "Mae Kampong",
+    "location": "Mae On, Chiang Mai",
+    "region": "Chiang Mai Province",
+    "country": "Thailand",
+    "coords": [
+      18.8654,
+      99.349
+    ],
+    "publishedAt": "2024-10-13",
+    "duration": "23:11",
+    "youtubeId": "3NvMggyagrk",
+    "poster": "pl-mae-kampong.jpg",
+    "summary": "A day ride to the village in the hills above Mae On, and the street that runs through it."
+  },
+  {
+    "id": "song-sean",
+    "title": "Song Sean Coffee Shop",
+    "location": "Doi Pui, Chiang Mai",
+    "region": "Chiang Mai Province",
+    "country": "Thailand",
+    "coords": [
+      18.8166,
+      98.8891
+    ],
+    "publishedAt": "2024-09-29",
+    "duration": "16:57",
+    "youtubeId": "Fr0h6OkepwI",
+    "poster": "pl-song-sean.jpg",
+    "summary": "Coffee at Suan Song Saen on Doi Pui, then the road back down through the trees."
+  },
+  {
+    "id": "doi-pui-viewpoint",
+    "title": "Doi Pui Viewpoint",
+    "location": "Doi Pui, Chiang Mai",
+    "region": "Chiang Mai Province",
+    "country": "Thailand",
+    "coords": [
+      18.8166,
+      98.8891
+    ],
+    "publishedAt": "2024-09-22",
+    "duration": "12:56",
+    "youtubeId": "pZ_eDrazCDc",
+    "poster": "pl-doi-pui-viewpoint.jpg",
+    "summary": "The misty road up Doi Suthep to the viewpoint, with the city somewhere below."
+  },
+  {
+    "id": "tha-phae-gate",
+    "title": "Tha Phae Gate",
+    "location": "Chiang Mai old city",
+    "region": "Chiang Mai Province",
+    "country": "Thailand",
+    "coords": [
+      18.7878,
+      98.9933
+    ],
+    "publishedAt": "2024-09-14",
+    "duration": "38:52",
+    "youtubeId": "plS6uDEu8Pg",
+    "poster": "pl-tha-phae-gate.jpg",
+    "summary": "A night ride into the old city, to Tha Phae Gate and the market streets around it."
+  },
+  {
+    "id": "chaloem-phra-kiat",
+    "title": "Chaloem Phra Kiat Pavilion",
+    "location": "Suthep, Chiang Mai",
+    "region": "Chiang Mai Province",
+    "country": "Thailand",
+    "coords": [
+      18.7914,
+      98.9332
+    ],
+    "publishedAt": "2024-09-08",
+    "duration": "21:49",
+    "youtubeId": "Un3X8oicXi0",
+    "poster": "pl-chaloem-phra-kiat.jpg",
+    "summary": "The viewpoint on the way up Doi Suthep, and the road that keeps climbing."
+  },
+  {
+    "id": "doi-kham",
+    "title": "Wat Phra That Doi Kham",
+    "location": "Mae Hia, Chiang Mai",
+    "region": "Chiang Mai Province",
+    "country": "Thailand",
+    "coords": [
+      18.7598,
+      98.9179
+    ],
+    "publishedAt": "2024-09-01",
+    "duration": "30:44",
+    "youtubeId": "K6fG1y3CGbM",
+    "poster": "pl-doi-kham.jpg",
+    "summary": "The temple after rain, with the city wet and the light going."
+  },
+  {
+    "id": "angkaew",
+    "title": "Angkaew Reservoir",
+    "location": "Suthep, Chiang Mai",
+    "region": "Chiang Mai Province",
+    "country": "Thailand",
+    "coords": [
+      18.8052,
+      98.9503
+    ],
+    "publishedAt": "2024-08-25",
+    "duration": "24:59",
+    "youtubeId": "e5mDxImxsQc",
+    "poster": "pl-angkaew.jpg",
+    "summary": "A loop around the reservoir at Chiang Mai University, with the water and the hills in one frame."
+  }
+]

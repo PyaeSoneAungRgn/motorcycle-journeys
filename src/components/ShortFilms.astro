@@ -1,0 +1,91 @@
+---
+import { Image } from 'astro:assets';
+import SectionHeading from './SectionHeading.astro';
+import { getPhoto } from '../lib/photos';
+
+export interface RideClip {
+  title: string;
+  file: string;
+  poster: string;
+  duration: string;
+  orientation: 'landscape' | 'portrait';
+  note: string;
+  alt: string;
+}
+
+interface Props {
+  clips: RideClip[];
+  number?: string;
+}
+
+const { clips, number = '02' } = Astro.props;
+
+const totalSeconds = clips.reduce((total, clip) => {
+  const [minutes, seconds] = clip.duration.split(':').map((part) => Number.parseInt(part, 10) || 0);
+  return total + minutes * 60 + seconds;
+}, 0);
+
+const totalLabel = `${Math.floor(totalSeconds / 60)}:${String(totalSeconds % 60).padStart(2, '0')}`;
+const clipWord = clips.length === 1 ? 'clip' : 'clips';
+---
+
+<section class="ride-gallery short-films" id="short-films" aria-labelledby="short-films-heading">
+  <SectionHeading
+    number={number}
+    title="Short films"
+    note={`${clips.length} ${clipWord} · ${totalLabel}`}
+    id="short-films-heading"
+  />
+
+  <div class:list={['clip-grid', clips.length === 1 && 'clip-grid--single', clips.length === 2 && 'clip-grid--two']}>
+    {clips.map((clip) => (
+      <figure class={`clip-card clip-card--${clip.orientation}`}>
+        <div
+          class="clip-card__media"
+          data-clip
+          data-src={`/videos/${clip.file}`}
+          data-title={clip.title}
+        >
+          <Image
+            src={getPhoto(clip.poster)}
+            alt={clip.alt}
+            widths={[480, 720, 1000]}
+            sizes={
+              clips.length === 1
+                ? '(max-width: 820px) 92vw, 760px'
+                : clips.length === 2
+                  ? '(max-width: 640px) 92vw, 46vw'
+                  : '(max-width: 640px) 92vw, (max-width: 1080px) 46vw, 30vw'
+            }
+            loading="lazy"
+          />
+          <button
+            class="clip-card__play"
+            type="button"
+            data-clip-play
+            aria-label={`Play short film: ${clip.title}`}
+          >
+            <span class="clip-card__play-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 14" fill="currentColor">
+                <path d="M0 0l12 7-12 7z" />
+              </svg>
+            </span>
+            <span class="clip-card__play-label">Play film</span>
+          </button>
+          <span class="clip-card__duration">{clip.duration}</span>
+          <noscript>
+            <a class="clip-card__fallback" href={`/videos/${clip.file}`}>Watch clip</a>
+          </noscript>
+        </div>
+        <figcaption>
+          <span class="clip-card__title">{clip.title}</span>
+          <span class="clip-card__note">{clip.note}</span>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+
+  <script>
+    import '../scripts/clip-player';
+  </script>
+</section>

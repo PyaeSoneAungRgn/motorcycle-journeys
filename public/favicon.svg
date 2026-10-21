@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Pyae Sone Aung">
+  <rect width="64" height="64" fill="#ffffff" />
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#17140f" stroke-width="1" />
+  <circle cx="32" cy="32" r="25" fill="none" stroke="#e4ded1" stroke-width="0.75" />
+  <text x="32" y="41" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="26" fill="#17140f">P</text>
+  <circle cx="47" cy="24" r="3" fill="#8a4a2c" />
+</svg>

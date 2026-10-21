@@ -1,0 +1,29 @@
+---
+import type { Post } from '../lib/content';
+import { formatShortDate } from '../lib/format';
+
+interface Props {
+  posts: Post[];
+  compact?: boolean;
+  labelledBy?: string;
+}
+
+const { posts, compact = false, labelledBy } = Astro.props;
+---
+
+<ul class={`post-list${compact ? ' post-list--compact' : ''}`} aria-labelledby={labelledBy}>
+  {posts.map((post) => (
+    <li>
+      <a class="post-row" href={`/posts/${post.id}`}>
+        <time class="post-row__date" datetime={post.data.date.toISOString()}>
+          {formatShortDate(post.data.date)}
+        </time>
+        <span class="post-row__main">
+          <span class="post-row__title">{post.data.title}</span>
+          {!compact && <span class="post-row__desc">{post.data.description}</span>}
+        </span>
+        <span class="post-row__arrow" aria-hidden="true">→</span>
+      </a>
+    </li>
+  ))}
+</ul>

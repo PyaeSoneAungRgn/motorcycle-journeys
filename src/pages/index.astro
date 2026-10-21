@@ -1,0 +1,394 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ArrowLink from '../components/ArrowLink.astro';
+import RouteMap from '../components/RouteMap.astro';
+import VlogCard from '../components/VlogCard.astro';
+import HomeTimeLapses from '../components/HomeTimeLapses.astro';
+import PostList from '../components/PostList.astro';
+import { SITE } from '../config';
+import { getPhoto } from '../lib/photos';
+import {
+  getPhotos,
+  getPosts,
+  getRides,
+  getVlogs,
+  journalSince,
+  photosForRide,
+  toMapRoute,
+  totalDistance,
+} from '../lib/content';
+import { pickRandomPhotos } from '../lib/random-photos';
+import { formatDistance, formatNumber } from '../lib/format';
+
+const rides = await getRides();
+const vlogs = await getVlogs();
+const posts = await getPosts();
+const photos = await getPhotos();
+
+const featuredRide = rides.find((ride) => ride.data.featured) ?? rides[0];
+const randomPhotos = pickRandomPhotos(photos, 3);
+const latestVlogs = vlogs.slice(0, 3);
+const latestPosts = posts.slice(0, 3);
+const timeLapses = rides.flatMap((ride) =>
+  ride.data.timeLapses.map((item) => ({
+    ...item,
+    rideId: ride.id,
+    rideTitle: ride.data.title,
+  })),
+);
+const timeLapseNumber = latestVlogs.length > 0 ? '04' : '03';
+const atlasNumber = timeLapses.length
+  ? latestVlogs.length > 0
+    ? '05'
+    : '04'
+  : latestVlogs.length > 0
+    ? '04'
+    : '03';
+const hero = getPhoto('nan-sky-road.jpg');
+const ridePhotos = photosForRide(photos, featuredRide.id);
+const mapRoutes = rides.map(toMapRoute);
+const distance = totalDistance(rides);
+const since = journalSince(rides);
+
+const heroImageAlt =
+  'An empty road leading toward layered forested mountains in Nan province';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url,
+    description: SITE.description,
+    inLanguage: 'en',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: SITE.name,
+    url: SITE.url,
+    jobTitle: 'Motorcycle traveller, photographer and filmmaker',
+    sameAs: [SITE.socials.youtube],
+  },
+];
+---
+
+<Base image={hero} imageAlt={heroImageAlt} schema={schema}>
+  <section class="hero">
+    <div class="shell">
+      <div class="hero__top">
+        <p class="eyebrow"><span class="dot"></span> Motorcycle journals · Vol. I</p>
+      </div>
+
+      <h1 class="h1">Off the map,<br /><em>on the road.</em></h1>
+
+      <div class="hero__main">
+        <div class="hero__copy">
+          <p class="lede">
+            Photographs, route notes and the occasional film from Thailand and Vietnam — a New
+            Year run from Chiang Mai to Pai, five days around Nan, the Daibutsu at Doi Phra Chan,
+            Da Nang to the Hai Van Pass, and a day ride to Doi Inthanon.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--solid" href="/rides">
+              Explore the rides <span class="btn__arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="btn btn--ghost" href="/photos">
+              See the photographs <span class="btn__arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+          <dl class="hero__stats">
+            <div class="hero__stat">
+              <dt>Since</dt>
+              <dd>{since}</dd>
+            </div>
+            <div class="hero__stat">
+              <dt>Journeys</dt>
+              <dd>{rides.length}</dd>
+            </div>
+            <div class="hero__stat">
+              <dt>Distance</dt>
+              <dd>{formatDistance(distance)}</dd>
+            </div>
+            <div class="hero__stat">
+              <dt>Photographs</dt>
+              <dd>{photos.length}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <figure class="hero__figure frame" data-reveal>
+          <span class="frame__mat">
+            <Image
+              src={hero}
+              alt={heroImageAlt}
+              widths={[640, 960, 1280]}
+              sizes="(max-width: 1080px) 92vw, 52vw"
+              priority
+            />
+          </span>
+          <figcaption>
+            <span class="loc">Piang So, Nan</span>
+            <span>Late afternoon</span>
+          </figcaption>
+          <svg class="stamp" viewBox="0 0 120 120" aria-hidden="true">
+            <defs>
+              <path
+                id="stamp-path"
+                d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"
+              ></path>
+            </defs>
+            <circle cx="60" cy="60" r="55"></circle>
+            <text>
+              <textPath href="#stamp-path" startOffset="0%">
+                MOTORCYCLE JOURNALS · EST. {since} ·
+              </textPath>
+            </text>
+            <text class="stamp__mark" x="60" y="65" text-anchor="middle">PSA</text>
+          </svg>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="featured-heading">
+    <div class="shell">
+      <SectionHeading
+        number="01"
+        title="The featured ride"
+        note={featuredRide.data.mapLabel ?? featuredRide.data.region}
+        link={{ href: '/rides', label: 'All rides' }}
+        id="featured-heading"
+      />
+
+      <div class="featured">
+        <figure class="featured__figure frame" data-reveal>
+          <a
+            class="frame__mat"
+            href={`/rides/${featuredRide.id}`}
+            aria-label={`Read the journal: ${featuredRide.data.title}`}
+          >
+            <Image
+              src={getPhoto(featuredRide.data.cover)}
+              alt={`${featuredRide.data.region}, ${featuredRide.data.country}`}
+              widths={[640, 960, 1280]}
+              sizes="(max-width: 1080px) 92vw, 55vw"
+              loading="lazy"
+            />
+          </a>
+          <figcaption>
+            <span class="loc">{featuredRide.data.region}, {featuredRide.data.country}</span>
+            <span>{featuredRide.data.season}</span>
+          </figcaption>
+        </figure>
+
+        <div class="featured__body" data-reveal>
+          <p class="eyebrow"><span class="dot"></span> Journey {String(rides.indexOf(featuredRide) + 1).padStart(2, '0')} · {featuredRide.data.country}</p>
+          <h3 class="featured__title">
+            <a href={`/rides/${featuredRide.id}`}>{featuredRide.data.title}</a>
+          </h3>
+          <p class="featured__text">{featuredRide.data.summary}</p>
+
+          <dl class="featured__stats">
+            <div class="featured__stat">
+              <dt>Distance</dt>
+              <dd>{formatDistance(featuredRide.data.distanceKm)}</dd>
+            </div>
+            <div class="featured__stat">
+              <dt>Days</dt>
+              <dd>{featuredRide.data.days}</dd>
+            </div>
+            <div class="featured__stat">
+              <dt>Photographs</dt>
+              <dd>{ridePhotos.length}</dd>
+            </div>
+          </dl>
+
+          <div class="featured__actions">
+            <a class="arrow-link" href={`/rides/${featuredRide.id}`}>
+              Read the journal <span class="arrow" aria-hidden="true">→</span>
+            </a>
+            <span class="featured__spark">
+              {featuredRide.data.loop ? 'Loop' : 'Point to point'} · {featuredRide.data.stops.length} stops
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="photographs-heading">
+    <div class="shell">
+      <SectionHeading
+        number="02"
+        title="Random photographs"
+        note={`${photos.length} in the archive`}
+        link={{ href: '/photos', label: 'Photographs' }}
+        id="photographs-heading"
+      />
+
+      <div class="photo-strip">
+        {randomPhotos.map((photo, index) => {
+          const image = getPhoto(photo.data.file);
+          return (
+            <figure class="frame photo-strip__item" data-reveal style={`--delay:${index + 1}`}>
+              <a
+                class="frame__mat"
+                href={image.src}
+                data-photo
+                data-full={image.src}
+                data-caption={photo.data.caption}
+                data-location={photo.data.location}
+                data-film={photo.data.film}
+                data-alt={photo.data.alt}
+                data-ride={photo.data.ride?.id}
+                aria-label={`Open photograph: ${photo.data.caption}, ${photo.data.location}`}
+              >
+                <Image
+                  src={image}
+                  alt={photo.data.alt}
+                  widths={[480, 720, 1000]}
+                  sizes="(max-width: 640px) 92vw, (max-width: 1080px) 42vw, 30vw"
+                  loading="lazy"
+                />
+              </a>
+              <figcaption>
+                <span class="loc">{photo.data.location}</span>
+                <span>{photo.data.film}</span>
+              </figcaption>
+            </figure>
+          );
+        })}
+      </div>
+
+      <div class="section-foot">
+        <ArrowLink href="/photos" label="Browse the full archive" />
+      </div>
+    </div>
+  </section>
+
+  {latestVlogs.length > 0 && (
+    <section class="section" aria-labelledby="films-heading">
+      <div class="shell">
+        <SectionHeading
+          number="03"
+          title="Recent films"
+          note="Ride vlogs"
+          link={{ href: '/vlogs', label: 'All episodes' }}
+          id="films-heading"
+        />
+
+        <div class="vlog-grid">
+          {latestVlogs.map((vlog, index) => (
+            <div data-reveal style={`--delay:${index + 1}`}>
+              <VlogCard
+                href={`/vlogs/${vlog.id}`}
+                title={vlog.data.title}
+                episode={vlog.data.episode}
+                duration={vlog.data.duration}
+                location={vlog.data.location}
+                poster={getPhoto(vlog.data.poster)}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {timeLapses.length > 0 && (
+    <section class="section" aria-labelledby="timelapses-heading">
+      <div class="shell">
+        <SectionHeading
+          number={timeLapseNumber}
+          title="Time lapses"
+          note={`${timeLapses.length} ${timeLapses.length === 1 ? 'time lapse' : 'time lapses'}`}
+          link={{ href: '/rides', label: 'All journeys' }}
+          id="timelapses-heading"
+        />
+        <HomeTimeLapses items={timeLapses} />
+      </div>
+    </section>
+  )}
+
+  <section class="section section--warm" aria-labelledby="atlas-heading" data-atlas>
+    <div class="shell">
+      <SectionHeading
+        number={atlasNumber}
+        title="The atlas"
+        note={`${formatNumber(distance)} km mapped`}
+        link={{ href: '/atlas', label: 'Open the atlas' }}
+        id="atlas-heading"
+      />
+
+      <div class="route-block">
+        <div class="route-block__map" data-reveal>
+          <RouteMap
+            routes={mapRoutes}
+            mode="preview"
+            height="420px"
+            reset
+            label={`Preview map of all ${rides.length} journeys`}
+          />
+          <div class="map-routes" role="group" aria-label="Journeys on the map">
+            {rides.map((ride, index) => (
+              <button
+                class="map-routes__item"
+                type="button"
+                data-route-focus={ride.id}
+                aria-pressed="false"
+                aria-label={`Show ${ride.data.title} on the map`}
+              >
+                <span class="map-routes__no">{String(index + 1).padStart(2, '0')}</span>
+                <span>{ride.data.mapLabel ?? ride.data.region}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+        <div class="route-block__copy" data-reveal>
+          <p class="prose">
+            A working map of every journey — the roads north to Pai and Nan, the Daibutsu south of
+            Chiang Mai, the coast run to the Hai Van Pass and the loop up Doi Inthanon, all in one
+            frame. Open the atlas for each route, its stops and the notes between.
+          </p>
+          <dl class="atlas__totals">
+            <div>
+              <strong>{rides.length}</strong>
+              {rides.length === 1 ? 'journey' : 'journeys'}
+            </div>
+            <div>
+              <strong>{formatNumber(distance)} km</strong>
+              on the clock
+            </div>
+            <div>
+              <strong>{photos.length}</strong>
+              photographs
+            </div>
+          </dl>
+          <ArrowLink href="/atlas" label="Explore the map" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {latestPosts.length > 0 && (
+    <section class="section section--quiet" aria-labelledby="writing-heading">
+      <div class="shell home-writing">
+        <div class="home-writing__intro">
+          <p class="eyebrow"><span class="dot"></span> From the notebook</p>
+          <h2 class="h3" id="writing-heading">Writing</h2>
+          <p>
+            Notes on Laravel, PHP and the tools around them — written before the road, kept at
+            their original addresses.
+          </p>
+          <a class="arrow-link" href="/posts">
+            All {posts.length} pieces <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+        <PostList posts={latestPosts} compact labelledBy="writing-heading" />
+      </div>
+    </section>
+  )}
+</Base>

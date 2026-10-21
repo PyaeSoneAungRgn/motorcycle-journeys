@@ -1,0 +1,80 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import { getPosts, type Post } from '../../lib/content';
+import { SITE } from '../../config';
+
+const posts = await getPosts();
+const years = posts.map((post) => post.data.date.getUTCFullYear());
+const from = years.length ? Math.min(...years) : 2020;
+const to = years.length ? Math.max(...years) : 2020;
+const yearLabel = from === to ? `${from}` : `${from}—${to}`;
+
+const byYear = new Map<number, Post[]>();
+for (const post of posts) {
+  const year = post.data.date.getUTCFullYear();
+  const group = byYear.get(year);
+  if (group) group.push(post);
+  else byYear.set(year, [post]);
+}
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Writing',
+  url: `${SITE.url}/posts`,
+  description:
+    'Notes on Laravel, PHP and the tools around them — the old blog, kept at its original addresses.',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: posts.map((post, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: post.data.title,
+      url: `${SITE.url}/posts/${post.id}`,
+    })),
+  },
+};
+---
+
+<Base
+  title="Writing"
+  description="The old blog, kept in place: notes on Laravel, PHP and the tools around them, plus the occasional story that led to the road."
+  schema={schema}
+>
+  <header class="page-head">
+    <div class="shell">
+      <p class="eyebrow"><span class="dot"></span> Writing · {posts.length} pieces</p>
+      <div class="page-head__grid">
+        <h1 class="h1">Notes from<br /><em>the desk.</em></h1>
+        <div class="page-head__aside">
+          <p class="lede">
+            Before the road there was the blog: notes on Laravel, PHP and the tools around them,
+            plus the odd story that eventually pointed north. All of it kept here, at its old
+            address.
+          </p>
+          <div class="page-head__meta">
+            <span>{posts.length} pieces</span>
+            <span>{yearLabel}</span>
+            <span>Old URLs kept</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="shell post-archive">
+    {[...byYear.entries()].map(([year, items]) => (
+      <section class="post-year" aria-labelledby={`year-${year}`}>
+        <h2 class="post-year__label" id={`year-${year}`}>{year}</h2>
+        <div class="post-year__items">
+          <PostList posts={items} labelledBy={`year-${year}`} />
+        </div>
+      </section>
+    ))}
+
+    <div class="section-foot">
+      <a class="link" href="/">← Back to the road</a>
+    </div>
+  </div>
+</Base>

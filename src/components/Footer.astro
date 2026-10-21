@@ -1,0 +1,71 @@
+---
+import { SITE } from '../config';
+import { getRides, journalSince } from '../lib/content';
+
+const year = new Date().getFullYear();
+const rides = await getRides();
+const since = journalSince(rides);
+---
+
+<footer class="site-footer">
+  <div class="footer-cta">
+    <div class="shell footer-cta__inner">
+      <div>
+        <p class="eyebrow"><span class="dot"></span> Say hello</p>
+        <h2>See you<br /><em>on the road.</em></h2>
+        <a class="footer-email" href={`mailto:${SITE.email}`}>
+          {SITE.email}
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <p class="footer-note">
+        Ride journals, photographs and the occasional wrong turn — collected slowly, one tank at a
+        time.
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-main">
+    <div class="shell footer-grid">
+      <div class="footer-col">
+        <h3>About this place</h3>
+        <p class="footer-about">
+          A personal notebook of motorcycle journeys through Thailand, Vietnam and beyond, kept by
+          {SITE.name}. Photographs, films and route notes — no sponsored detours.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="/rides">Rides</a></li>
+          <li><a href="/places">Places</a></li>
+          <li><a href="/photos">Photographs</a></li>
+          <li><a href="/vlogs">Vlogs</a></li>
+          <li><a href="/atlas">Atlas</a></li>
+          <li><a href="/posts">Writing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Elsewhere</h3>
+        <ul>
+          <li><a href={SITE.socials.youtube} rel="me noopener">YouTube</a></li>
+          <li><a href={`mailto:${SITE.email}`}>Email</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Colophon</h3>
+        <p class="footer-about">
+          Maps by OpenFreeMap, MapLibre &amp; OpenStreetMap contributors. Photography © Pyae Sone
+          Aung.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="shell">
+    <div class="footer-colophon">
+      <span>© {year} {SITE.name} · Motorcycle journals since {since}</span>
+      <a href="#main">Back to top ↑</a>
+    </div>
+  </div>
+</footer>

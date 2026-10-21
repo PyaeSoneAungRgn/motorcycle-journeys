@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import type { GalleryItem } from '../lib/gallery';
+
+interface Props {
+  items: GalleryItem[];
+  labelledBy?: string;
+}
+const { items, labelledBy } = Astro.props;
+---
+
+<div class="gallery" aria-labelledby={labelledBy}>
+  {items.map((item) => (
+    <a
+      class="photo-item"
+      href={item.full}
+      data-photo
+      data-full={item.full}
+      data-caption={item.caption}
+      data-location={item.location}
+      data-film={item.film}
+      data-alt={item.alt}
+      data-ride={item.ride}
+    >
+      <span class="photo-item__mat">
+        <Image
+          src={item.image}
+          alt={item.alt}
+          widths={[400, 640, 900, 1200]}
+          sizes="(max-width: 640px) 92vw, (max-width: 1080px) 46vw, 30vw"
+          loading="lazy"
+          decoding="async"
+        />
+      </span>
+      <span class="photo-item__cap">
+        <span class="cap-title">{item.caption}</span>
+        <span class="cap-loc">{item.location}</span>
+      </span>
+    </a>
+  ))}
+</div>

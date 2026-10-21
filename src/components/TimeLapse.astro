@@ -1,0 +1,39 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import TimeLapseMedia from './TimeLapseMedia.astro';
+import type { TimeLapseItem } from '../lib/timelapses';
+
+interface Props {
+  timeLapses: TimeLapseItem[];
+  number?: string;
+}
+
+const { timeLapses, number = '02' } = Astro.props;
+const multiple = timeLapses.length > 1;
+const note = multiple
+  ? `${timeLapses.length} time lapses`
+  : `${timeLapses[0]?.title ?? 'Time lapse'} · ${timeLapses[0]?.duration ?? ''}`;
+---
+
+<section class="timelapse-section" id="time-lapse" aria-labelledby="timelapse-heading">
+  <SectionHeading
+    number={number}
+    title={multiple ? 'Time lapses' : 'Time lapse'}
+    note={note}
+    id="timelapse-heading"
+  />
+
+  <div class:list={['timelapse-list', multiple && 'timelapse-list--multi']}>
+    {timeLapses.map((timeLapse, index) => (
+      <TimeLapseMedia
+        timeLapse={timeLapse}
+        autoplay={index === 0}
+        compact={multiple}
+      />
+    ))}
+  </div>
+
+  <script>
+    import '../scripts/timelapse';
+  </script>
+</section>

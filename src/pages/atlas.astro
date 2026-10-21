@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import RouteMap from '../components/RouteMap.astro';
+import { getRides, getPhotos, toMapRoute, totalDistance } from '../lib/content';
+import { getPhoto } from '../lib/photos';
+import { formatDistance, formatNumber } from '../lib/format';
+import { SITE } from '../config';
+
+const rides = await getRides();
+const photos = await getPhotos();
+const routes = rides.map(toMapRoute);
+const distance = totalDistance(rides);
+const days = rides.reduce((total, ride) => total + ride.data.days, 0);
+const ogImage = getPhoto(rides[0].data.cover);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Motorcycle journey atlas',
+  itemListElement: rides.map((ride, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: ride.data.title,
+    url: `${SITE.url}/rides/${ride.id}`,
+  })),
+};
+---
+
+<Base
+  title="Atlas"
+  description={`Five journeys on one map — a New Year run from Chiang Mai to Pai, five days around Nan province, the Daibutsu at Doi Phra Chan, Da Nang to the Hai Van Pass and Doi Inthanon, ${formatNumber(distance)} kilometres across Thailand and Vietnam.`}
+  image={ogImage}
+  schema={schema}
+>
+  <header class="page-head">
+    <div class="shell">
+      <p class="eyebrow"><span class="dot"></span> The atlas · {rides.length} {rides.length === 1 ? 'route' : 'routes'}</p>
+      <div class="page-head__grid">
+        <h1 class="h1">Every road,<br /><em>one map.</em></h1>
+        <div class="page-head__aside">
+          <p class="lede">
+            A working map of everywhere the bike has been. Select a journey to follow the road and
+            reveal its stops, or open it in the atlas and trace the whole route.
+          </p>
+          <div class="page-head__meta">
+            <span>{rides.length} {rides.length === 1 ? 'route' : 'routes'}</span>
+            <span>{formatNumber(distance)} km</span>
+            <span>{days} days riding</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="shell" data-atlas>
+    <div class="atlas__routes" role="group" aria-label="Journeys on the map">
+      {rides.map((ride, index) => (
+        <button
+          class="atlas__route"
+          type="button"
+          data-route-focus={ride.id}
+          aria-pressed="false"
+          aria-label={`Show ${ride.data.title} on the map`}
+        >
+          <span class="atlas__item-no">{String(index + 1).padStart(2, '0')}</span>
+          <span class="atlas__route-body">
+            <span class="atlas__item-title">{ride.data.title}</span>
+            <span class="atlas__item-region">{ride.data.region}, {ride.data.country}</span>
+          </span>
+          <span class="atlas__item-km">{formatDistance(ride.data.distanceKm)}</span>
+        </button>
+      ))}
+    </div>
+
+    <div class="atlas__map" data-reveal>
+      <RouteMap
+        routes={routes}
+        mode="atlas"
+        reset={rides.length > 1}
+        legend
+        height="clamp(440px, 62vh, 660px)"
+        label="Map of all motorcycle journeys"
+      />
+    </div>
+
+    <div class="atlas__foot">
+      <p class="atlas__hint">
+        Select the journey to zoom in and reveal its numbered stops. Select again to step back out.
+      </p>
+      <p class="atlas__hint">{photos.length} photographs pinned to these roads.</p>
+    </div>
+  </div>
+</Base>

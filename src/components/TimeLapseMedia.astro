@@ -1,0 +1,47 @@
+---
+import { getPhoto } from '../lib/photos';
+import type { TimeLapseItem } from '../lib/timelapses';
+
+interface Props {
+  timeLapse: TimeLapseItem;
+  autoplay?: boolean;
+  compact?: boolean;
+}
+
+const { timeLapse, autoplay = true, compact = false } = Astro.props;
+const poster = getPhoto(timeLapse.poster);
+---
+
+<figure class:list={['timelapse', compact && 'timelapse--compact']}>
+  <div class="timelapse__media" data-timelapse data-autoplay={autoplay ? 'true' : 'false'}>
+    <video
+      class="timelapse__video"
+      data-timelapse-video
+      src={`/videos/${timeLapse.file}`}
+      poster={poster.src}
+      muted
+      loop
+      playsinline
+      preload="none"
+      aria-label={timeLapse.alt}
+    ></video>
+
+    <button
+      class="timelapse__toggle"
+      type="button"
+      data-timelapse-toggle
+      aria-label={autoplay ? 'Pause time lapse' : 'Play time lapse'}
+    >
+      {autoplay ? 'Pause' : 'Play'}
+    </button>
+
+    <figcaption class="timelapse__caption">
+      <span class="timelapse__title">{timeLapse.title}</span>
+      <span class="timelapse__note">{timeLapse.note} · {timeLapse.duration}</span>
+    </figcaption>
+
+    <noscript>
+      <a class="timelapse__fallback" href={`/videos/${timeLapse.file}`}>Watch the time lapse</a>
+    </noscript>
+  </div>
+</figure>
