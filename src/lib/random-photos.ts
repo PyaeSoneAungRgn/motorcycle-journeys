@@ -12,7 +12,7 @@ function shuffled<T>(items: T[], random: () => number): T[] {
 
 /**
  * Pick a random landscape, a random portrait and one more photograph for the home
- * strip. Runs at build time, so rebuild the site for a new selection.
+ * strip. This renders the initial, no-JS selection; the page re-picks on every load.
  */
 export function pickRandomPhotos(
   photos: Photo[],

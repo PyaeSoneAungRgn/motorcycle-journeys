@@ -211,8 +211,9 @@ Each entry needs an `id`, a `file` that exists in `src/assets/photos`, and real 
 - `alt` is required; it is used by the grid and the lightbox.
 - Photos are sorted oldest-first by `takenAt`, so the gallery follows the trip.
 - Source images are kept at 1600px on the long edge; Astro generates the responsive variants.
-- The home page shows three random photographs on each build — a landscape, a portrait and one
-  more — so a rebuild rotates the selection (`src/lib/random-photos.ts`).
+- The home page shows three random photographs — a landscape, a portrait and one more — and
+  re-picks them on every page load (`src/scripts/random-photos.ts`). The build-time pick from
+  `src/lib/random-photos.ts` remains as the no-JS fallback.
 
 ### Long-form films
 

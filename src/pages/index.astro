@@ -20,6 +20,7 @@ import {
   totalDistance,
 } from '../lib/content';
 import { pickRandomPhotos } from '../lib/random-photos';
+import { buildPhotoPool } from '../lib/photo-pool';
 import { formatDistance, formatNumber } from '../lib/format';
 
 const rides = await getRides();
@@ -29,6 +30,7 @@ const photos = await getPhotos();
 
 const featuredRide = rides.find((ride) => ride.data.featured) ?? rides[0];
 const randomPhotos = pickRandomPhotos(photos, 3);
+const photoPool = await buildPhotoPool(photos);
 const latestVlogs = vlogs.slice(0, 3);
 const latestPosts = posts.slice(0, 3);
 const timeLapses = rides.flatMap((ride) =>
@@ -229,11 +231,22 @@ const schema = [
         id="photographs-heading"
       />
 
-      <div class="photo-strip">
+      <script
+        type="application/json"
+        id="home-photo-pool"
+        set:html={JSON.stringify(photoPool).replace(/</g, '\\u003c')}
+      />
+
+      <div class="photo-strip" data-random-photos>
         {randomPhotos.map((photo, index) => {
           const image = getPhoto(photo.data.file);
           return (
-            <figure class="frame photo-strip__item" data-reveal style={`--delay:${index + 1}`}>
+            <figure
+              class="frame photo-strip__item"
+              data-reveal
+              data-photo-id={photo.id}
+              style={`--delay:${index + 1}`}
+            >
               <a
                 class="frame__mat"
                 href={image.src}
@@ -249,7 +262,7 @@ const schema = [
                 <Image
                   src={image}
                   alt={photo.data.alt}
-                  widths={[480, 720, 1000]}
+                  widths={[400, 640, 900, 1200]}
                   sizes="(max-width: 640px) 92vw, (max-width: 1080px) 42vw, 30vw"
                   loading="lazy"
                 />
@@ -391,4 +404,8 @@ const schema = [
       </div>
     </section>
   )}
+
+  <script>
+    import '../scripts/random-photos';
+  </script>
 </Base>
