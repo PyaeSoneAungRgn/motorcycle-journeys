@@ -76,7 +76,7 @@ Prefix commands with `ASTRO_TELEMETRY_DISABLED=1` if needed.
 - **75 photographs** across the five trips (27 Nan, 22 Chiang Mai, 15 Da Nang, 5 Doi Inthanon,
   6 Daibutsu), with locations and capture dates taken from the originals' EXIF.
 - **11 short films** (2:49 total) — self-hosted, click-to-play clips. The Nan Loop has five (the
-  temple lights, the road north, the Sapan bridge in the rain, the Ban Piang So ridge and the road
+  temple lights, the road north, the bridge in the rain, the Ban Piang So ridge and the road
   to Pua); Chiang Mai has three (Pai canyon,
   the New Year gathering and the First Valley fireplace); Da Nang has one (the ride to the pass);
   Doi Inthanon has two (the royal gardens and the pagoda in fog).
