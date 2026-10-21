@@ -1,3 +1,13 @@
+# allow build scripts for wrangler's deps (esbuild/workerd binaries);
+# without this, Cloudflare Workers Builds fails with ERR_PNPM_IGNORED_BUILDS
+allowBuilds:
+  esbuild: true
+  workerd: true
 minimumReleaseAgeExclude:
   - '@astrojs/check@0.9.11'
   - astro@7.4.1
+# wrangler's deps need their build scripts (esbuild binary, workerd binary)
+# or Cloudflare Workers Builds fails with ERR_PNPM_IGNORED_BUILDS
+onlyBuiltDependencies:
+  - esbuild
+  - workerd

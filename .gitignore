@@ -18,3 +18,5 @@ pnpm-debug.log*
 
 # old site snapshot (has its own git history, kept locally)
 old-blog/
+# wrangler local state
+.wrangler/

@@ -11,6 +11,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "deploy": "pnpm run build && wrangler deploy",
     "check": "astro check",
     "routes": "node scripts/fetch-routes.mjs",
     "posts:import": "node scripts/import-posts.mjs",
@@ -27,6 +28,7 @@
     "@astrojs/check": "^0.9.11",
     "gray-matter": "^4.0.3",
     "playwright-core": "^1.64.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "wrangler": "^4.151.2"
   }
 }
