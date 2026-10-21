@@ -75,8 +75,9 @@ Prefix commands with `ASTRO_TELEMETRY_DISABLED=1` if needed.
   Wave and a Yamaha QBIX; Vietnam used a rental scooter.
 - **75 photographs** across the five trips (27 Nan, 22 Chiang Mai, 15 Da Nang, 5 Doi Inthanon,
   6 Daibutsu), with locations and capture dates taken from the originals' EXIF.
-- **9 short films** (2:21 total) — self-hosted, click-to-play clips. The Nan Loop has three (the
-  temple lights, the Ban Piang So ridge and the road to Pua); Chiang Mai has three (Pai canyon,
+- **11 short films** (2:49 total) — self-hosted, click-to-play clips. The Nan Loop has five (the
+  temple lights, the road north, the Sapan bridge in the rain, the Ban Piang So ridge and the road
+  to Pua); Chiang Mai has three (Pai canyon,
   the New Year gathering and the First Valley fireplace); Da Nang has one (the ride to the pass);
   Doi Inthanon has two (the royal gardens and the pagoda in fog).
 - **3 time lapses** (1:32 total) — *Yud Vela cafe* over the Nan valley, *Last sunset of 2025*

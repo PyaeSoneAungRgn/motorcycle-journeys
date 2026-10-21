@@ -280,8 +280,8 @@ await page.goto(`${BASE}/vlogs`, { waitUntil: 'load' });
 await page.goto(`${BASE}/rides/nan-loop`, { waitUntil: 'load' });
 {
   const clips = await page.locator('.clip-card').count();
-  if (clips !== 3) fail(`short film section shows ${clips} clips`);
-  else ok('short film section shows 3 clips');
+  if (clips !== 5) fail(`short film section shows ${clips} clips`);
+  else ok('short film section shows 5 clips');
 
   await page.locator('[data-clip-play]').first().click();
   await page.waitForSelector('.clip-card__video', { timeout: 5000 });

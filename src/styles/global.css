@@ -3137,6 +3137,25 @@ a.frame__mat {
   aspect-ratio: 16 / 9;
 }
 
+/* Five clips: three portrait cards over two wide landscape ones. */
+@media (min-width: 821px) {
+  .clip-grid--five {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .clip-grid--five .clip-card:nth-child(-n + 3) {
+    grid-column: span 2;
+  }
+
+  .clip-grid--five .clip-card:nth-child(n + 4) {
+    grid-column: span 3;
+  }
+
+  .clip-grid--five .clip-card:nth-child(n + 4) .clip-card__media {
+    aspect-ratio: 16 / 9;
+  }
+}
+
 @media (max-width: 820px) {
   .clip-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

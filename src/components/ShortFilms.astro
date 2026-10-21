@@ -27,6 +27,18 @@ const totalSeconds = clips.reduce((total, clip) => {
 
 const totalLabel = `${Math.floor(totalSeconds / 60)}:${String(totalSeconds % 60).padStart(2, '0')}`;
 const clipWord = clips.length === 1 ? 'clip' : 'clips';
+
+// Five clips run as a 3 + 2 grid; the wide pair needs a larger source than the trio.
+const sizesFor = (index: number) => {
+  if (clips.length === 1) return '(max-width: 820px) 92vw, 760px';
+  if (clips.length === 2) return '(max-width: 640px) 92vw, 46vw';
+  if (clips.length === 5) {
+    return index < 3
+      ? '(max-width: 640px) 92vw, (max-width: 820px) 46vw, 25vw'
+      : '(max-width: 640px) 92vw, (max-width: 820px) 46vw, 40vw';
+  }
+  return '(max-width: 640px) 92vw, (max-width: 1080px) 46vw, 30vw';
+};
 ---
 
 <section class="ride-gallery short-films" id="short-films" aria-labelledby="short-films-heading">
@@ -37,8 +49,8 @@ const clipWord = clips.length === 1 ? 'clip' : 'clips';
     id="short-films-heading"
   />
 
-  <div class:list={['clip-grid', clips.length === 1 && 'clip-grid--single', clips.length === 2 && 'clip-grid--two']}>
-    {clips.map((clip) => (
+  <div class:list={['clip-grid', clips.length === 1 && 'clip-grid--single', clips.length === 2 && 'clip-grid--two', clips.length === 5 && 'clip-grid--five']}>
+    {clips.map((clip, index) => (
       <figure class={`clip-card clip-card--${clip.orientation}`}>
         <div
           class="clip-card__media"
@@ -50,13 +62,7 @@ const clipWord = clips.length === 1 ? 'clip' : 'clips';
             src={getPhoto(clip.poster)}
             alt={clip.alt}
             widths={[480, 720, 1000]}
-            sizes={
-              clips.length === 1
-                ? '(max-width: 820px) 92vw, 760px'
-                : clips.length === 2
-                  ? '(max-width: 640px) 92vw, 46vw'
-                  : '(max-width: 640px) 92vw, (max-width: 1080px) 46vw, 30vw'
-            }
+            sizes={sizesFor(index)}
             loading="lazy"
           />
           <button

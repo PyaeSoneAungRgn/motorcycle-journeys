@@ -14,7 +14,7 @@ for the web. Capture dates and coordinates in `src/data/photos.json` come from t
 
 ## Films
 
-The nine short films and three time lapses across the Nan Loop, Chiang Mai & Pai, Da Nang & Hai
+The eleven short films and three time lapses across the Nan Loop, Chiang Mai & Pai, Da Nang & Hai
 Van Pass and Doi Inthanon pages are © **Pyae Sone Aung, 2025–2026**. They are self-hosted H.264
 MP4 files in `public/videos/`, trimmed for the web, and all rights are reserved.
 
